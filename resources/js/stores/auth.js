@@ -1,4 +1,5 @@
 import $axios from '../api.js'
+import axios from 'axios'
 
 const state = () => ({
 
@@ -9,7 +10,7 @@ const mutations = {
 }
 
 const actions = {
-    submit({ commit }, payload) {
+    async submit({ commit }, payload) {
         localStorage.setItem('token', null) //RESET LOCAL STORAGE MENJADI NULL
         commit('SET_TOKEN', null, { root: true }) //RESET STATE TOKEN MENJADI NULL
         //KARENA MUTATIONS SET_TOKEN BERADA PADA ROOT STORES, MAKA DITAMBAHKAN PARAMETER
@@ -26,6 +27,18 @@ const actions = {
                     //MAKA LOCAL STORAGE DAN STATE TOKEN AKAN DISET MENGGUNAKAN
                     //API DARI SERVER RESPONSE
                     localStorage.setItem('token', response.data.data)
+                    let token = response.data.data
+                    let uri = '/api/user-authenticated/'+token
+
+                    axios.get(uri).then((resp) => {
+                        localStorage.setItem('name', resp.data.data.name)
+                        localStorage.setItem('email', resp.data.data.email)
+                        localStorage.setItem('role', resp.data.data.role)
+                        localStorage.setItem('divisi', resp.data.data.divisi)
+                    })
+
+
+
                     commit('SET_TOKEN', response.data.data, { root: true })
                 } else {
                     commit('SET_ERRORS', { invalid: 'Email/Password Salah' }, { root: true })

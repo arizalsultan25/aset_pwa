@@ -21,6 +21,12 @@ const store = new Vuex.Store({
     state: {
         //VARIABLE TOKEN MENGAMBIL VALUE DARI LOCAL STORAGE token
         token: localStorage.getItem('token'),
+        data : {
+            name : localStorage.getItem('name'),
+            email : localStorage.getItem('email'),
+            divisi : localStorage.getItem('divisi'),
+            role : localStorage.getItem('role'),
+        },
         errors: []
     },
     getters: {

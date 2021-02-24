@@ -1,9 +1,11 @@
 import $axios from '../api.js'
 
 const state = () => ({
-    users: [], //UNTUK MENAMPUNG DATA KURIR
+    users: [], //UNTUK MENAMPUNG DATA USERS
     page: 1, //PAGE AKTIF
-    id: '' //NANTI AKAN DIGUNAKAN UNTUK EDIT DATA
+    id: '', //NANTI AKAN DIGUNAKAN UNTUK EDIT DATA
+
+    authenticated : [], //MENAMPUNG DATA USER YANG SAAT INI LOGIN
 })
 
 const mutations = {
@@ -18,7 +20,10 @@ const mutations = {
     //MENGUBAH STATE ID
     SET_ID_UPDATE(state, payload) {
         state.id = payload
-    }
+    },
+    ASSIGN_USER_AUTH(state, payload){
+        state.authenticated = payload
+    },
 }
 
 const actions = {
@@ -70,6 +75,18 @@ const actions = {
             .then((response) => {
                 //APABILA BERHASIL, FETCH DATA TERBARU DARI SERVER
                 dispatch('getUsers').then(() => resolve())
+            })
+        })
+    },
+
+    //MENGAMBIL DATA USER YANG SEDANG LOGIN
+    getUserLogin({ commit }) {
+        return new Promise((resolve, reject) => {
+            $axios.get(`user-authenticated`)
+            .then((response) => {
+                //SIMPAN DATA USER TERSEBUT
+                commit('ASSIGN_USER_AUTH', response.data.data)
+                resolve(response.data)
             })
         })
     }

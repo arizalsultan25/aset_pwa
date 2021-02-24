@@ -13,7 +13,9 @@
           <router-link to="/" class="nav-link">Home</router-link>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="javascript:void(0)" @click="logout" class="nav-link">Logout</a>
+          <a href="javascript:void(0)" @click="logout" class="nav-link"
+            >Logout</a
+          >
         </li>
       </ul>
     </nav>
@@ -45,7 +47,7 @@
             />
           </div>
           <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
+            <a href="#" class="d-block">{{ nama }}</a>
           </div>
         </div>
 
@@ -65,7 +67,7 @@
                 <p>Dashboard</p>
               </router-link>
             </li>
-            
+
             <li class="nav-item">
               <router-link :to="{ name: 'asets.data' }" class="nav-link">
                 <i class="nav-icon fas fa-boxes text-teal"></i>
@@ -79,36 +81,28 @@
             <li class="nav-item">
               <router-link :to="{ name: 'scan' }" class="nav-link">
                 <i class="nav-icon fas fa-qrcode text-teal"></i>
-                <p>
-                  Scan Aset
-                </p>
+                <p>Scan Aset</p>
               </router-link>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" v-if="role == 0">
               <router-link :to="{ name: 'pelaporan' }" class="nav-link">
                 <i class="nav-icon fas fa-archive text-teal"></i>
-                <p>
-                  Pelaporan Aset
-                </p>
+                <p>Pelaporan Aset</p>
               </router-link>
             </li>
 
             <li class="nav-item">
               <router-link :to="{ name: 'pelaporan.scan' }" class="nav-link">
                 <i class="nav-icon fas fa-qrcode text-teal"></i>
-                <p>
-                  Lapor Kerusakan Aset
-                </p>
+                <p>Lapor Kerusakan Aset</p>
               </router-link>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" v-if="role == 0">
               <router-link :to="{ name: 'users.data' }" class="nav-link">
                 <i class="nav-icon fas fa-users text-teal"></i>
-                <p>
-                  User
-                </p>
+                <p>User</p>
               </router-link>
             </li>
 
@@ -135,24 +129,54 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 
 export default {
-     methods: {
+  methods: {
     logout() {
-            return new Promise((resolve, reject) => {
-                localStorage.removeItem('token')
-                resolve()
-            }).then(() => {
-                this.$store.state.token = localStorage.getItem('token')
-                this.$router.push('/login')
-            })
-        }
+      return new Promise((resolve, reject) => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("divisi");
+        localStorage.removeItem("name");
+        localStorage.removeItem("email");
+        localStorage.removeItem("role");
+        resolve();
+      }).then(() => {
+        this.$store.state.token = localStorage.getItem("token");
+        this.$store.state.data.name = localStorage.getItem("name");
+        this.$store.state.data.divisi = localStorage.getItem("divisi");
+        this.$store.state.data.email = localStorage.getItem("email");
+        this.$store.state.data.role = localStorage.getItem("role");
+
+        this.$router.push("/login");
+      });
+    },
+
+    setUserData() {
+      this.nama = localStorage.getItem("name");
+      this.role = this.$store.state.data.role;
+      this.divisi = this.$store.state.data.divisi;
+      this.email = this.$store.state.data.email;
+
+      console.log(this.nama)
+    },
   },
-  computed : {
-    ...mapState('user', {
-            authenticated: state => state.authenticated
-        }),
-  }
-}
+  computed: {
+    ...mapState("user", {
+      authenticated: (state) => state.authenticated,
+    }),
+  },
+  created() {
+    setTimeout(3000);
+    this.setUserData();
+  },
+  data() {
+    return {
+      nama: this.$store.state.data.name,
+      role: "",
+      email: "",
+      divisi: "",
+    };
+  },
+};
 </script>

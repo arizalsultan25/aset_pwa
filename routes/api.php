@@ -37,3 +37,5 @@ Route::prefix('asets')->namespace('API')->group(function(){
 Route::prefix('users')->namespace('API')->group(function(){
     Route::post('store', 'UserController@store');
 });
+
+Route::get('user-authenticated/{token}', 'API\UserController@getUserLogin')->name('user.authenticated');

@@ -103,9 +103,9 @@ export default {
     ...mapMutations(["CLEAR_ERRORS"]),
 
     //KETIKA TOMBOL LOGIN DITEKAN, MAKA AKAN MEMINCU METHODS postLogin()
-    postLogin() {
+    async postLogin() {
       //DIMANA TOMBOL INI AKAN MENJALANKAN FUNGSI submit() DENGAN MENGIRIMKAN DATA YANG DIBUTUHKAN
-      this.submit(this.data).then(() => {
+      await this.submit(this.data).then(() => {
         //KEMUDIAN DI CEK VALUE DARI isAuth
         //APABILA BERNILAI TRUE
         if (this.isAuth) {

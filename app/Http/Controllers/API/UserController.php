@@ -11,10 +11,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::where('role', '!=','0')->orderBy('created_at', 'DESC');
+        $users = User::where('role', '!=', '0')->orderBy('created_at', 'DESC');
         if (request()->q != '') {
             $users =  $users->where('email', 'LIKE', '%' . request()->q . '%')
-                            ->orWhere('name', 'LIKE', '%' . request()->q . '%');
+                ->orWhere('name', 'LIKE', '%' . request()->q . '%');
         }
         return new UserCollection($users->paginate(10));
     }
@@ -51,5 +51,11 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return response()->json(['status' => 'success', 'user' => $user], 200);
+    }
+
+    public function getUserLogin($token)
+    {
+        $user = User::where('api_token','=',$token)->first(); //MENGAMBIL USER YANG SEDANG LOGIN
+        return response()->json(['status' => 'success', 'data' => $user,]);
     }
 }

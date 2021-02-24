@@ -24,11 +24,21 @@ Vue.use(VueQrcodeReader);
 // Add Bootstrap
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import { mapActions, mapGetters, mapState } from 'vuex'
+
 new Vue({
     el: '#dw',
     router,
     store,
     components: {
         App
-    }
+    },
+    computed: {
+        ...mapGetters(['isAuth']),
+        ...mapState(['token']),
+        ...mapState('user', {
+            user_authenticated: state => state.authenticated
+        })
+    },
+    
 })
