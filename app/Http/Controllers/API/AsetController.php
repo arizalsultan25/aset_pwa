@@ -15,12 +15,27 @@ class AsetController extends Controller
     {
         $asets = Aset::orderBy('created_at', 'DESC');
         if (request()->q != '') {
-            $asets = $asets ->where('nama_aset', 'LIKE', '%' . request()->q . '%')
-                            ->orWhere('qr', 'LIKE', '%' . request()->q . '%')
-                            ->orWhere('merk', 'LIKE', '%' . request()->q . '%')
-                            ->orWhere('jenis', 'LIKE', '%' . request()->q . '%')
-                            ->orWhere('status', 'LIKE', '%' . request()->q . '%')
-                            ->orWhere('divisi', 'LIKE', '%' . request()->q . '%');
+            $asets = $asets->where('nama_aset', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('qr', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('merk', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('jenis', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('status', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('divisi', 'LIKE', '%' . request()->q . '%');
+        }
+        return new AsetCollection($asets->paginate(10));
+    }
+
+    //index data aset divisi
+    public function index_div($divisi)
+    {
+        $asets = Aset::orderBy('created_at', 'DESC')->where('divisi',$divisi);
+        if (request()->q != '') {
+            $asets = $asets->where('nama_aset', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('qr', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('merk', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('jenis', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('status', 'LIKE', '%' . request()->q . '%')
+                ->andWhere('divisi', '=', $divisi);
         }
         return new AsetCollection($asets->paginate(10));
     }
@@ -86,7 +101,7 @@ class AsetController extends Controller
             'merk' => 'required',
             'divisi' => 'required',
         ]);
-        
+
         $data = [
             'nama_aset' => request('nama_aset'),
             'jenis' => request('jenis'),
@@ -112,9 +127,9 @@ class AsetController extends Controller
     public function destroy($id)
     {
         $aset = Aset::find($id);
-        if(file_exists(public_path('\gambar\asets\\'.$aset->gambar))){
-            unlink(public_path('\gambar\asets\\'.$aset->gambar));
-          }
+        if (file_exists(public_path('\gambar\asets\\' . $aset->gambar))) {
+            unlink(public_path('\gambar\asets\\' . $aset->gambar));
+        }
         $aset->delete();
         return response()->json(['status' => 'success'], 200);
     }

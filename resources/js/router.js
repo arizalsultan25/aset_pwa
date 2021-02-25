@@ -30,6 +30,13 @@ import FormPelaporan from './pages/pelaporan/Form.vue'
 import ScanPelaporan from './pages/pelaporan/Scan.vue'
 import Laporan from './pages/pelaporan/Laporan.vue'
 
+// IMPORT HALAMAN ASET PER DIVISI
+import IndexAsetDiv from './pages/aset_divisi/Index.vue'
+import DataAsetDiv from './pages/aset_divisi/Aset.vue'
+import AddAsetDiv from './pages/aset_divisi/Add.vue'
+import EditAsetDiv from './pages/aset_divisi/Edit.vue'
+import DetailAsetDiv from './pages/aset_divisi/Detail.vue'
+
 Vue.use(Router)
 
 //DEFINE ROUTE
@@ -80,7 +87,7 @@ const router = new Router({
             ]
         },
 
-        // Aset User
+        // Route User
         {
             path: '/users',
             component: IndexUser,
@@ -126,7 +133,7 @@ const router = new Router({
             }
         },
 
-        // Aset Pelaporan
+        // Route Pelaporan
         {
             path: '/pelaporan',
             component: IndexPelaporan,
@@ -151,7 +158,39 @@ const router = new Router({
             name: 'pelaporan.scan',
             component: ScanPelaporan,
             meta: { title: 'Scan Aset' }
-        }
+        },
+
+        // Aset Routes
+        {
+            path: '/property',
+            component: IndexAsetDiv,
+            children: [
+                {
+                    path: '',
+                    name: 'property.data',
+                    component: DataAsetDiv,
+                    meta: { title: 'Data Aset' }
+                },
+                {
+                    path: 'add',
+                    name: 'property.add',
+                    component: AddAsetDiv,
+                    meta: { title: 'Add New Aset' }
+                },
+                {
+                    path: 'edit/:id',
+                    name: 'property.edit',
+                    component: EditAsetDiv,
+                    meta: { title: 'Edit Aset' }
+                },
+                {
+                    path: 'detail/:id',
+                    name: 'property.detail',
+                    component: DetailAsetDiv,
+                    meta: { title: 'Detail Aset' }
+                }
+            ]
+        },
 
     ]
 });

@@ -70,6 +70,25 @@ const actions = {
                 })
         })
     },
+
+    //FUNGSI INI UNTUK MELAKUKAN REQUEST DATA aset DARI SERVER
+    getAsetsDiv({ commit, state }, payload,) {
+        //MENGECEK PAYLOAD ADA ATAU TIDAK
+        let search = typeof payload != 'undefined' ? payload : ''
+        // let div = this
+        let div = localStorage.getItem('divisi')
+        return new Promise((resolve, reject) => {
+            //REQUEST DATA DENGAN ENDPOINT /AsetS
+            $axios.get(`/asets/${div}/data?page=${state.page}&q=${search}`)
+                .then((response) => {
+                    //SIMPAN DATA KE STATE MELALUI MUTATIONS
+                    commit('ASSIGN_DATA', response.data)
+                    resolve(response.data)
+                })
+        })
+    },
+
+
     //FUNGSI UNTUK MENAMBAHKAN DATA BARU
     submitAset({ dispatch, commit, state }) {
         return new Promise((resolve, reject) => {
@@ -130,7 +149,21 @@ const actions = {
                     dispatch('getAsets').then(() => resolve())
                 })
         })
+    },
+
+    //MENGHAPUS DATA 
+    removeAsetDiv({ dispatch }, payload) {
+        return new Promise((resolve, reject) => {
+            //MENGIRIM PERMINTAAN KE SERVER UNTUK MENGHAPUS DATA
+            //DENGAN METHOD DELETE DAN ID Aset DI URL
+            $axios.delete(`/asets/${payload}`)
+                .then((response) => {
+                    //APABILA BERHASIL, FETCH DATA TERBARU DARI SERVER
+                    dispatch('getAsetsDiv').then(() => resolve())
+                })
+        })
     }
+
 }
 
 export default {

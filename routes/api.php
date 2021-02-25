@@ -27,8 +27,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 });
 
 Route::prefix('asets')->namespace('API')->group(function(){
-    Route::get('all', 'AsetController@data');
     Route::get('data', 'AsetController@index');
+    Route::get('{divisi}/data', 'AsetController@index_div');
     Route::post('store', 'AsetController@store');
     Route::post('/{id}/edit', 'AsetController@update');
     Route::delete('delete/{id}', 'AsetController@delete');

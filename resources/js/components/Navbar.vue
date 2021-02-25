@@ -47,7 +47,7 @@
             />
           </div>
           <div class="info">
-            <a href="#" class="d-block">{{ nama }}</a>
+            <a href="#" class="d-block">{{ $store.state.data.name }}</a>
           </div>
         </div>
 
@@ -68,12 +68,21 @@
               </router-link>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" v-if="$store.state.data.role == 0">
               <router-link :to="{ name: 'asets.data' }" class="nav-link">
                 <i class="nav-icon fas fa-boxes text-teal"></i>
                 <p>
-                  Aset
+                  Data Aset
                   <span class="right badge badge-danger">New</span>
+                </p>
+              </router-link>
+            </li>
+
+            <li class="nav-item" v-if="$store.state.data.role == 1">
+              <router-link :to="{ name: 'property.data' }" class="nav-link">
+                <i class="nav-icon fas fa-boxes text-teal"></i>
+                <p>
+                  Aset
                 </p>
               </router-link>
             </li>
@@ -85,7 +94,7 @@
               </router-link>
             </li>
 
-            <li class="nav-item" v-if="role == 0">
+            <li class="nav-item" v-if="$store.state.data.role == 0">
               <router-link :to="{ name: 'pelaporan' }" class="nav-link">
                 <i class="nav-icon fas fa-archive text-teal"></i>
                 <p>Pelaporan Aset</p>
@@ -99,7 +108,7 @@
               </router-link>
             </li>
 
-            <li class="nav-item" v-if="role == 0">
+            <li class="nav-item" v-if="$store.state.data.role == 0">
               <router-link :to="{ name: 'users.data' }" class="nav-link">
                 <i class="nav-icon fas fa-users text-teal"></i>
                 <p>User</p>
@@ -152,24 +161,13 @@ export default {
       });
     },
 
-    setUserData() {
-      this.nama = localStorage.getItem("name");
-      this.role = this.$store.state.data.role;
-      this.divisi = this.$store.state.data.divisi;
-      this.email = this.$store.state.data.email;
-
-      console.log(this.nama)
-    },
   },
   computed: {
     ...mapState("user", {
       authenticated: (state) => state.authenticated,
     }),
   },
-  created() {
-    setTimeout(3000);
-    this.setUserData();
-  },
+  
   data() {
     return {
       nama: this.$store.state.data.name,
