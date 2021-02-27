@@ -108,6 +108,13 @@
               </router-link>
             </li>
 
+            <li class="nav-item" v-if="$store.state.data.role == 1">
+              <router-link :to="{ name: 'pelaporan' }" class="nav-link">
+                <i class="nav-icon fas fa-scroll text-teal"></i>
+                <p>Laporan Kerusakan Aset</p>
+              </router-link>
+            </li>
+
             <li class="nav-item" v-if="$store.state.data.role == 0">
               <router-link :to="{ name: 'users.data' }" class="nav-link">
                 <i class="nav-icon fas fa-users text-teal"></i>

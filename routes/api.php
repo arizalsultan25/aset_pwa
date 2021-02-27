@@ -34,6 +34,14 @@ Route::prefix('asets')->namespace('API')->group(function(){
     Route::delete('delete/{id}', 'AsetController@delete');
 });
 
+Route::prefix('laporan')->namespace('API')->group(function(){
+    Route::get('data', 'AsetController@index');
+    Route::get('{divisi}/data', 'LaporanController@indexDiv');
+    Route::post('store', 'LaporanController@store');
+    Route::post('/{id}/edit', 'AsetController@update');
+    Route::delete('delete/{id}', 'AsetController@delete');
+});
+
 Route::prefix('users')->namespace('API')->group(function(){
     Route::post('store', 'UserController@store');
 });

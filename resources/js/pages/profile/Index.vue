@@ -515,9 +515,9 @@ export default {
     }
   },
     methods: {
-      getUserData(){
+      async getUserData(){
         let token = this.$store.state.token
-        axios.get(`/api/user-authenticated/${token}`).then((response) => {
+        await axios.get(`/api/user-authenticated/${token}`).then((response) => {
           let row = response.data.data
           this.data.nama = row.name
           this.data.email = row.email

@@ -16,9 +16,11 @@ class CreateLaporansTable extends Migration
         Schema::create('laporans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_aset');
+            $table->enum('divisi', ['IT Support', 'Finance', 'Production', 'Human Resource']);
+            $table->string('judul');
             $table->text('detail');
-            $table->string('gambar');
-            $table->enum('status',['belum ditanggapi','diterima','ditolak']);
+            $table->string('gambar')->nullable();
+            $table->enum('status',['belum ditanggapi','diterima','ditolak'])->default('belum ditanggapi');
             $table->text('keterangan')->nullable();
             $table->timestamps();
 
