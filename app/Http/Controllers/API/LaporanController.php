@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Laporan;
+use App\Aset;
 use App\Http\Resources\LaporanCollection;
 
 class LaporanController extends Controller
@@ -12,23 +13,35 @@ class LaporanController extends Controller
     //index
     public function index()
     {
-        $laporan = Laporan::orderBy('created_at', 'DESC');
+        $laporan = Laporan::join('asets', 'laporans.id_aset', '=', 'asets.id')
+            ->select('laporans.*', 'asets.nama_aset', 'asets.qr', 'asets.merk', 'asets.jenis')
+            ->orderBy('laporans.updated_at', 'DESC');
         if (request()->q != '') {
-            $laporan = $laporan->where('judul', 'LIKE', '%' . request()->q . '%')
-                ->orWhere('detail', 'LIKE', '%' . request()->q . '%')
-                ->orWhere('status', 'LIKE', '%' . request()->q . '%');
+            $laporan = $laporan->where('laporans.id', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('laporans.id_aset', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('asets.nama_aset', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('laporans.divisi', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('asets.jenis', 'LIKE', '%' . request()->q . '%');
         }
         return new LaporanCollection($laporan->paginate(10));
     }
 
     public function indexDiv($divisi)
     {
-        $laporan = Laporan::orderBy('created_at', 'DESC')->where('divisi', $divisi);
+        $laporan = Laporan::join('asets', 'laporans.id_aset', '=', 'asets.id')
+            ->select('laporans.*', 'asets.nama_aset', 'asets.qr', 'asets.merk', 'asets.jenis')
+            ->orderBy('laporans.updated_at', 'DESC')
+            ->where('laporans.divisi', $divisi);
         if (request()->q != '') {
-            $laporan = $laporan->where('judul', 'LIKE', '%' . request()->q . '%')
-                ->orWhere('detail', 'LIKE', '%' . request()->q . '%')
-                ->orWhere('status', 'LIKE', '%' . request()->q . '%')
-                ->andWhere('divisi', $divisi);
+            $laporan = $laporan->where('laporans.id', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('laporans.id_aset', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('laporans.divisi', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('laporans.status', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('laporans.judul', 'LIKE', '%' . request()->q . '%')
+
+                ->orWhere('asets.nama_aset', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('asets.jenis', 'LIKE', '%' . request()->q . '%')
+                ->andWhere('laporans.divisi', $divisi);
         }
         return new LaporanCollection($laporan->paginate(10));
     }
@@ -47,7 +60,7 @@ class LaporanController extends Controller
             $explode = explode(',', request('gambar'));
             $gambar = base64_decode($explode[1]);
 
-            
+
             $path = public_path() . '\gambar\laporan\\' . request('qr') . '.' . $extension;
             file_put_contents($path, $gambar);
         }
@@ -65,6 +78,44 @@ class LaporanController extends Controller
         return response()->json([
             'message' => 'Aset telah berhasil dilaporkan',
             'data' => $laporan,
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $report = Laporan::join('asets', 'laporans.id_aset', '=', 'asets.id')
+            ->select('laporans.*', 'asets.nama_aset', 'asets.qr', 'asets.merk', 'asets.jenis')
+            ->orderBy('laporans.created_at', 'DESC')
+            ->where('laporans.id', $id)->get();
+        return response()->json(['status' => 'success', 'data' => $report], 200);
+    }
+
+    public function update($id)
+    {
+        // parsing data
+        $data = [
+            'status' => request('status'),
+            'keterangan' => request('keterangan')
+        ];
+
+        // update
+        $report = Laporan::whereId($id);
+        $report->update($data);
+
+        $q = Laporan::whereId($id)->get();
+        $id_aset = $q[0]->id_aset;
+        if (request('status') == 'diterima') {
+            // Update status aset menjadi rusak
+            $aset = Aset::whereId($id_aset);
+            $aset->update([
+                'status' => 'rusak'
+            ]);
+        }
+
+        // Return pesan sukses
+        return response()->json([
+            'message' => 'Data laporan telah berhasil ditanggapi',
+            'data' => $report,
         ]);
     }
 }

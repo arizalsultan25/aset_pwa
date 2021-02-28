@@ -6,8 +6,7 @@
       </div>
       <div class="card-body">
         <div class="row mb-2">
-          <div class="col-sm-6">
-          </div>
+          <div class="col-sm-6"></div>
           <div class="col-sm-6">
             <div class="pull-right">
               <input
@@ -24,7 +23,7 @@
             striped
             hover
             bordered
-            :items="asets.data"
+            :items="laporans.data"
             :fields="fields"
             show-empty
           >
@@ -51,18 +50,28 @@
 
             <template #cell(status)="data">
               <span
-                class="badge badge-success"
-                v-if="data.item.status == 'baik'"
-                >OK</span
+                class="badge badge-warning"
+                v-if="data.item.status == 'belum ditanggapi'"
+                >Belum ditanggapi</span
               >
-              <span class="badge badge-danger" v-else>Rusak</span>
+              <span
+                class="badge badge-success"
+                v-else-if="data.item.status == 'diterima'"
+                >Disetujui</span
+              >
+              <span class="badge badge-danger" v-else>Ditolak</span>
             </template>
 
             <template #cell(actions)="row">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <router-link :to="{ name: 'asets.detail', params: {id: row.item.qr} }" type="button" class="btn btn-primary">Detail</router-link>
-                <router-link :to="{ name: 'asets.edit', params: {id: row.item.qr} }" class="btn btn-warning">Edit</router-link>
-                <button type="button" class="btn btn-danger" @click="deleteAset(row.item.id)">Delete</button>
+              <div v-if="row.item.status == 'belum ditanggapi'">
+                <router-link
+                  :to="{ name: 'pelaporan.edit', params: { id: row.item.id } }"
+                  class="btn bg-teal"
+                  >Tanggapi</router-link
+                >
+              </div>
+              <div v-else>
+                <span class="badge badge-success">Telah ditanggapi</span>
               </div>
             </template>
           </b-table>
@@ -70,19 +79,19 @@
 
         <div class="row">
           <div class="col-md-6">
-            <p v-if="asets.data">
-              <i class="fa fa-bars"></i> {{ asets.data.length }} item dari
-              {{ asets.meta.total }} total data
+            <p v-if="laporans.data">
+              <i class="fa fa-bars"></i> {{ laporans.data.length }} item dari
+              {{ laporans.meta.total }} total data
             </p>
           </div>
           <div class="col-md-6">
             <div class="pull-right">
               <b-pagination
                 v-model="page"
-                :total-rows="asets.meta.total"
-                :per-page="asets.meta.per_page"
-                aria-controls="asets"
-                v-if="asets.data && asets.data.length > 0"
+                :total-rows="laporans.meta.total"
+                :per-page="laporans.meta.per_page"
+                aria-controls="laporans"
+                v-if="laporans.data && laporans.data.length > 0"
               ></b-pagination>
             </div>
           </div>
@@ -96,19 +105,19 @@
 import { mapActions, mapState } from "vuex";
 
 export default {
-  name: "DataAset",
+  name: "DataLaporan",
   created() {
     //SEBELUM COMPONENT DI-LOAD, REQUEST DATA DARI SERVER
-    this.getAsets();
+    this.getLaporans();
   },
   data() {
     return {
       //FIELD UNTUK B-TABLE, PASTIKAN KEY NYA SESUAI DENGAN FIELD DATABASE
       //AGAR OTOMATIS DI-RENDER
       fields: [
+        { key: "judul", label: "Judul Laporan" },
         { key: "nama_aset", label: "Nama Aset" },
         { key: "jenis", label: "Jenis" },
-        { key: "merk", label: "Merk" },
         { key: "divisi", label: "Divisi" },
         { key: "status", label: "Status" },
         { key: "qr", label: "Kode QR" },
@@ -118,38 +127,38 @@ export default {
     };
   },
   computed: {
-    //MENGAMBIL DATA AsetS DARI STATE AsetS
-    ...mapState("aset", {
-      asets: (state) => state.asets,
+    //MENGAMBIL DATA LaporanS DARI STATE LaporanS
+    ...mapState("laporan", {
+      laporans: (state) => state.laporans,
     }),
     page: {
       get() {
-        //MENGAMBIL VALUE PAGE DARI VUEX MODULE aset
-        return this.$store.state.aset.page;
+        //MENGAMBIL VALUE PAGE DARI VUEX MODULE laporan
+        return this.$store.state.laporan.page;
       },
       set(val) {
         //APABILA TERJADI PERUBAHAN VALUE DARI PAGE, MAKA STATE PAGE
         //DI VUEX JUGA AKAN DIUBAH
-        this.$store.commit("aset/SET_PAGE", val);
+        this.$store.commit("laporan/SET_PAGE", val);
       },
     },
   },
   watch: {
     page() {
       //APABILA VALUE DARI PAGE BERUBAH, MAKA AKAN MEMINTA DATA DARI SERVER
-      this.getAsets();
+      this.getLaporans();
     },
     search() {
       //APABILA VALUE DARI SEARCH BERUBAH MAKA AKAN MEMINTA DATA
       //SESUAI DENGAN DATA YANG SEDANG DICARI
-      this.getAsets(this.search);
+      this.getLaporans(this.search);
     },
   },
   methods: {
-    //MENGAMBIL FUNGSI DARI VUEX MODULE Aset
-    ...mapActions("aset", ["getAsets", "removeAset"]),
+    //MENGAMBIL FUNGSI DARI VUEX MODULE Laporan
+    ...mapActions("laporan", ["getLaporans", "removeLaporan"]),
     //KETIKA TOMBOL HAPUS DICLICK, MAKA AKAN MENJALANKAN METHOD INI
-    deleteAset(id) {
+    deleteLaporan(id) {
       //AKAN MENAMPILKAN JENDELA KONFIRMASI
       this.$fire({
         title: "Kamu Yakin?",
@@ -162,10 +171,10 @@ export default {
       }).then((result) => {
         //JIKA DISETUJUI
         if (result.value) {
-          //MAKA FUNGSI removeAset AKAN DIJALANKAN
-          this.removeAset(id);
+          //MAKA FUNGSI removeLaporan AKAN DIJALANKAN
+          this.removeLaporan(id);
 
-          this.$toasted.show('Data Aset telah berhasil dihapus', {
+          this.$toasted.show("Data Laporan telah berhasil dihapus", {
             type: "info",
             duration: 3000,
           });

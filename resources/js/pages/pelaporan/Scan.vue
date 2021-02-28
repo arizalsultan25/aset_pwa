@@ -35,6 +35,7 @@
 <script>
 // import
 import Breadcrumb from "../../components/Breadcrumb.vue";
+import axios from "axios";
 
 export default {
   name: "ScanPelaporan",
@@ -43,11 +44,34 @@ export default {
   },
 
   methods: {
-    onDecode(decodedString) {
-      this.$toasted.show(decodedString, {
-            type: "success",
-            duration: 3000,
-          });
+    async onDecode(decodedString) {
+      try {
+        let uri = "/api/asets/" + decodedString + "/edit";
+        await axios.get(uri).then((response) => {
+          let divisi = response.data.data.divisi;
+          let div = localStorage.getItem("divisi");
+          if (divisi != div) {
+            this.$toasted.show("Aset tersebut bukan milik divisi anda", {
+              type: "error",
+              duration: 3000,
+            });
+          } else {
+            this.$toasted.show(decodedString, {
+              type: "success",
+              duration: 3000,
+            });
+
+            this.$router.push({ name: 'pelaporan.add', params: {id: decodedString} })
+          }
+        });
+      } catch (e) {
+        console.log(e.response.data.errors);
+
+        this.$toasted.show("Something went wrong...", {
+          type: "error",
+          duration: 3000,
+        });
+      }
     },
   },
 };

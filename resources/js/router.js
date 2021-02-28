@@ -29,6 +29,9 @@ import IndexPelaporan from './pages/pelaporan/Index.vue'
 import FormPelaporan from './pages/pelaporan/Form.vue'
 import ScanPelaporan from './pages/pelaporan/Scan.vue'
 import Laporan from './pages/pelaporan/Laporan.vue'
+import TanggapiLaporan from './pages/pelaporan/Edit.vue'
+import LaporanDivisi from './pages/pelaporan/LaporanDivisi.vue'
+import DetailLaporan from './pages/pelaporan/Detail.vue'
 
 // IMPORT HALAMAN ASET PER DIVISI
 import IndexAsetDiv from './pages/aset_divisi/Index.vue'
@@ -145,10 +148,28 @@ const router = new Router({
                     meta: { title: 'Data Pelaporan' }
                 },
                 {
+                    path: 'divisi',
+                    name: 'pelaporan.divisi',
+                    component: LaporanDivisi,
+                    meta: { title: 'Data Pelaporan Divisi' }
+                },
+                {
+                    path: 'detail/:id',
+                    name: 'pelaporan.detail',
+                    component: DetailLaporan,
+                    meta: { title: 'Detail Pelaporan' }
+                },
+                {
                     path: 'add/:id',
                     name: 'pelaporan.add',
                     component: FormPelaporan,
                     meta: { title: 'Add New User' }
+                },
+                {
+                    path: 'edit/:id',
+                    name: 'pelaporan.edit',
+                    component: TanggapiLaporan,
+                    meta: { title: 'Tanggapi Laporan' }
                 }
             ]
         },

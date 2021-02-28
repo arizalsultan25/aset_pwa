@@ -69,7 +69,7 @@
               placeholder="Divisi" disabled
             >
               <option value="IT Support">IT Support</option>
-              <option value="Produksi">Produksi</option>
+              <option value="Production">Production</option>
               <option value="Human Resource">Human Resource</option>
               <option value="Finance">Finance</option>
             </select>

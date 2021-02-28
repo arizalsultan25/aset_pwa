@@ -33,7 +33,6 @@
               <option value="Kendaraan">Kendaraan</option>
               <option value="Furniture">Furniture</option>
               <option value="Elektronik">Elektronik</option>
-              <option value="Dll">dan lain lain</option>
             </select>
           </div>
 

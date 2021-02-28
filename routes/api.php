@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::resource('/asets', 'API\AsetController')->except(['show']);
+Route::resource('/laporan', 'API\LaporanController')->except(['show']);
 Route::resource('/users', 'API\UserController')->except(['show', 'update']);
 
 Route::group(['middleware' => 'auth:api'], function() {
@@ -35,10 +36,10 @@ Route::prefix('asets')->namespace('API')->group(function(){
 });
 
 Route::prefix('laporan')->namespace('API')->group(function(){
-    Route::get('data', 'AsetController@index');
+    Route::get('data', 'LaporanController@index');
     Route::get('{divisi}/data', 'LaporanController@indexDiv');
     Route::post('store', 'LaporanController@store');
-    Route::post('/{id}/edit', 'AsetController@update');
+    Route::post('/{id}/edit', 'LaporanController@update');
     Route::delete('delete/{id}', 'AsetController@delete');
 });
 

@@ -23,7 +23,7 @@
                 <div class="text-center">
                   <img
                     class="profile-user-img img-fluid img-circle"
-                    :src="'/dist/img/user4-128x128.jpg'"
+                    :src="'/dist/img/user2-160x160.jpg'"
                     alt="User profile picture"
                   />
                 </div>
@@ -34,16 +34,20 @@
 
                 <p class="text-muted text-center">Software Engineer</p>
 
-                <template v-if="$store.state.data.role == 0">
-                  <h3 class="badge bg-teal text-center">Administrator</h3>
-                </template>
-                <template v-else>
-                  <h3 class="badge bg-primary text-center">
-                    Staff Divisi {{ $store.state.data.divisi }}
-                  </h3>
-                </template>
-
                 <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Authority</b>
+                    <a class="float-right">
+                      <template v-if="$store.state.data.role == 0">
+                        <p class="badge bg-teal text-center">Administrator</p>
+                      </template>
+                      <template v-else>
+                        <p class="badge bg-primary text-center">
+                          Staff Divisi {{ $store.state.data.divisi }}
+                        </p>
+                      </template>
+                    </a>
+                  </li>
                   <li class="list-group-item">
                     <b>Followers</b> <a class="float-right">1,322</a>
                   </li>
@@ -428,7 +432,7 @@
                   <!-- /.tab-pane -->
 
                   <div class="tab-pane" id="settings">
-                    <form class="form-horizontal"  @submit.prevent="editProfile">
+                    <form class="form-horizontal" @submit.prevent="editProfile">
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label"
                           >ID</label
@@ -495,48 +499,46 @@
 <script>
 // import
 import Breadcrumb from "../../components/Breadcrumb.vue";
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "IndexUser",
   components: {
     breadcrumb: Breadcrumb,
   },
-  created(){
-    this.getUserData()
+  created() {
+    this.getUserData();
   },
-  data(){
+  data() {
     return {
-      data : {
-        nama : '',
-        email : '',
-        id : '',
+      data: {
+        nama: "",
+        email: "",
+        id: "",
       },
-    }
+    };
   },
-    methods: {
-      async getUserData(){
-        let token = this.$store.state.token
-        await axios.get(`/api/user-authenticated/${token}`).then((response) => {
-          let row = response.data.data
-          this.data.nama = row.name
-          this.data.email = row.email
-          this.data.id = row.id
-        })
+  methods: {
+    async getUserData() {
+      let token = this.$store.state.token;
+      await axios.get(`/api/user-authenticated/${token}`).then((response) => {
+        let row = response.data.data;
+        this.data.nama = row.name;
+        this.data.email = row.email;
+        this.data.id = row.id;
+      });
+    },
 
-      },
-
-      editProfile(){
-        // localStorage.setItem("nama", this.data.nama)
-        // this.$store.state.data.name = localStorage.getItem("nama");
-        console.log(this.data)
-        this.$toasted.show('Data Pengguna telah diperbarui', {
-            type: "success",
-            duration: 3000,
-          });
-      }
-    }
-
+    editProfile() {
+      // localStorage.setItem("nama", this.data.nama)
+      // this.$store.state.data.name = localStorage.getItem("nama");
+      console.log(this.data);
+      this.$toasted.show("Data Pengguna telah diperbarui", {
+        type: "success",
+        duration: 3000,
+      });
+    },
+  },
 };
 </script>
 

@@ -190,6 +190,8 @@ export default {
             duration: 3000,
           });
 
+          this.$router.push('/pelaporan/divisi')
+
           // this.ambilAset();
           // console.log(response)
         }

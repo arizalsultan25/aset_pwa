@@ -47,7 +47,7 @@
             />
           </div>
           <div class="info">
-            <a href="#" class="d-block">{{ $store.state.data.name }}</a>
+            <router-link  :to="{ name: 'profile' }" class="d-block">{{ $store.state.data.name }}</router-link>
           </div>
         </div>
 
@@ -78,6 +78,15 @@
               </router-link>
             </li>
 
+            <li class="nav-item" v-if="$store.state.data.role == 0">
+              <router-link :to="{ name: 'asets.data' }" class="nav-link">
+                <i class="nav-icon far fa-calendar-alt text-teal"></i>
+                <p>
+                  Jadwal Pemindaian Aset
+                </p>
+              </router-link>
+            </li>
+
             <li class="nav-item" v-if="$store.state.data.role == 1">
               <router-link :to="{ name: 'property.data' }" class="nav-link">
                 <i class="nav-icon fas fa-boxes text-teal"></i>
@@ -87,7 +96,7 @@
               </router-link>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" v-if="$store.state.data.role == 1">
               <router-link :to="{ name: 'scan' }" class="nav-link">
                 <i class="nav-icon fas fa-qrcode text-teal"></i>
                 <p>Scan Aset</p>
@@ -101,7 +110,7 @@
               </router-link>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" v-if="$store.state.data.role == 1">
               <router-link :to="{ name: 'pelaporan.scan' }" class="nav-link">
                 <i class="nav-icon fas fa-qrcode text-teal"></i>
                 <p>Lapor Kerusakan Aset</p>
@@ -109,7 +118,7 @@
             </li>
 
             <li class="nav-item" v-if="$store.state.data.role == 1">
-              <router-link :to="{ name: 'pelaporan' }" class="nav-link">
+              <router-link :to="{ name: 'pelaporan.divisi' }" class="nav-link">
                 <i class="nav-icon fas fa-scroll text-teal"></i>
                 <p>Laporan Kerusakan Aset</p>
               </router-link>
