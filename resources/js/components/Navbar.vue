@@ -79,7 +79,7 @@
             </li>
 
             <li class="nav-item" v-if="$store.state.data.role == 0">
-              <router-link :to="{ name: 'asets.data' }" class="nav-link">
+              <router-link :to="{ name: 'jadwal.data' }" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt text-teal"></i>
                 <p>
                   Jadwal Pemindaian Aset

@@ -40,6 +40,11 @@ import AddAsetDiv from './pages/aset_divisi/Add.vue'
 import EditAsetDiv from './pages/aset_divisi/Edit.vue'
 import DetailAsetDiv from './pages/aset_divisi/Detail.vue'
 
+// IMPORT HALAMAN JADWAL ASET
+import IndexJadwal from './pages/jadwal/Index.vue'
+import Jadwal from './pages/jadwal/Jadwal.vue'
+import AddJadwal from './pages/jadwal/Add.vue'
+
 Vue.use(Router)
 
 //DEFINE ROUTE
@@ -181,7 +186,7 @@ const router = new Router({
             meta: { title: 'Scan Aset' }
         },
 
-        // Aset Routes
+        // Route Aset Divisi
         {
             path: '/property',
             component: IndexAsetDiv,
@@ -212,6 +217,26 @@ const router = new Router({
                 }
             ]
         },
+
+        // Route Jadwal Aset Admin
+        {
+            path: '/jadwal',
+            component: IndexJadwal,
+            children: [
+                {
+                    path: '',
+                    name: 'jadwal.data',
+                    component: Jadwal,
+                    meta: { title: 'Jadwal Pemindaian Aset' }
+                },
+                {
+                    path: 'add',
+                    name: 'jadwal.add',
+                    component: AddJadwal,
+                    meta: { title: 'Create Schedule' }
+                },
+            ]
+         },
 
     ]
 });

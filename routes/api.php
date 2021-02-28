@@ -21,6 +21,7 @@ Route::post('/login', 'Auth\LoginController@login');
 
 Route::resource('/asets', 'API\AsetController')->except(['show']);
 Route::resource('/laporan', 'API\LaporanController')->except(['show']);
+Route::resource('/jadwal', 'API\JadwalController')->except(['show']);
 Route::resource('/users', 'API\UserController')->except(['show', 'update']);
 
 Route::group(['middleware' => 'auth:api'], function() {
@@ -40,7 +41,14 @@ Route::prefix('laporan')->namespace('API')->group(function(){
     Route::get('{divisi}/data', 'LaporanController@indexDiv');
     Route::post('store', 'LaporanController@store');
     Route::post('/{id}/edit', 'LaporanController@update');
-    Route::delete('delete/{id}', 'AsetController@delete');
+});
+
+Route::prefix('jadwal')->namespace('API')->group(function(){
+    Route::get('data', 'JadwalController@index');
+    Route::get('{divisi}/data', 'JadwalController@indexDiv');
+    Route::post('store', 'JadwalController@store');
+    Route::post('/{id}/edit', 'LaporanController@update');
+    Route::delete('delete/{id}', 'JadwalController@delete');
 });
 
 Route::prefix('users')->namespace('API')->group(function(){

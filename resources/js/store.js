@@ -6,6 +6,7 @@ import auth from './stores/auth.js'
 import aset from './stores/aset.js'
 import user from './stores/user.js'
 import laporan from './stores/laporan.js'
+import jadwal from './stores/jadwal.js'
 
 
 Vue.use(Vuex)
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
         auth,
         aset,
         user,
-        laporan
+        laporan,
+        jadwal
     },
   	//STATE HAMPIR SERUPA DENGAN PROPERTY DATA DARI COMPONENT HANYA SAJA DAPAT DIGUNAKAN SECARA GLOBAL
     state: {
