@@ -20,6 +20,7 @@ import EditUser from './pages/users/Edit.vue'
 
 // IMPORT HALAMAN SCAN
 import IndexScan from './pages/scan/Index.vue'
+import DetailScan from './pages/scan/Detail.vue'
 
 // IMPORT HALAMAN PROFILE
 import Profile from './pages/profile/Index.vue'
@@ -128,6 +129,16 @@ const router = new Router({
             meta: {
                 requiresAuth: true,
                 title: 'Scan Asset'
+            }
+        },
+
+        {
+            path: '/scan-detail/:id',
+            name: 'scan.detail',
+            component: DetailScan,
+            meta: {
+                requiresAuth: true,
+                title: 'Detail Aset'
             }
         },
 

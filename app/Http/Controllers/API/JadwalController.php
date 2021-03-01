@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\JadwalScan;
 use App\Http\Resources\JadwalCollection;
+use Illuminate\Support\Facades\Date;
 
 class JadwalController extends Controller
 {
@@ -67,5 +68,19 @@ class JadwalController extends Controller
         $jadwal = JadwalScan::find($id);
         $jadwal->delete();
         return response()->json(['status' => 'success'], 200);
+    }
+
+    // cekJadwal Divisi
+    public function checkDivisi($divisi)
+    {
+        $tgl = Date('Y-m-d');
+        $jadwal = JadwalScan::where('divisi', $divisi);
+        $jadwal = $jadwal->Where('tanggal', $tgl)->get();
+
+        return response()->json([
+            'divisi' => $divisi,
+            'data' => $jadwal,
+            'tanggal' => $tgl
+        ]);
     }
 }

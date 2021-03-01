@@ -46,6 +46,7 @@ Route::prefix('laporan')->namespace('API')->group(function(){
 Route::prefix('jadwal')->namespace('API')->group(function(){
     Route::get('data', 'JadwalController@index');
     Route::get('{divisi}/data', 'JadwalController@indexDiv');
+    Route::get('{divisi}/check', 'JadwalController@CheckDivisi');
     Route::post('store', 'JadwalController@store');
     Route::post('/{id}/edit', 'LaporanController@update');
     Route::delete('delete/{id}', 'JadwalController@delete');

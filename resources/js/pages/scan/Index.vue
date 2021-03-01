@@ -45,9 +45,11 @@ export default {
   methods: {
     onDecode(decodedString) {
       this.$toasted.show(decodedString, {
-            type: "success",
-            duration: 3000,
-          });
+        type: "success",
+        duration: 3000,
+      });
+
+      this.$router.push({ name: "scan.detail", params: { id: decodedString } });
     },
   },
 };
