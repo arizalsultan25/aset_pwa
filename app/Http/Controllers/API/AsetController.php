@@ -35,7 +35,7 @@ class AsetController extends Controller
                 ->orWhere('merk', 'LIKE', '%' . request()->q . '%')
                 ->orWhere('jenis', 'LIKE', '%' . request()->q . '%')
                 ->orWhere('status', 'LIKE', '%' . request()->q . '%')
-                ->andWhere('divisi', '=', $divisi);
+                ->where('divisi', '=', $divisi);
         }
         return new AsetCollection($asets->paginate(10));
     }

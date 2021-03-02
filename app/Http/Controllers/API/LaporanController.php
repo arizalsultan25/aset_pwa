@@ -41,7 +41,7 @@ class LaporanController extends Controller
 
                 ->orWhere('asets.nama_aset', 'LIKE', '%' . request()->q . '%')
                 ->orWhere('asets.jenis', 'LIKE', '%' . request()->q . '%')
-                ->andWhere('laporans.divisi', $divisi);
+                ->where('laporans.divisi', $divisi);
         }
         return new LaporanCollection($laporan->paginate(10));
     }

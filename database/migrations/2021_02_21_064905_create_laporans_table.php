@@ -25,7 +25,7 @@ class CreateLaporansTable extends Migration
             $table->timestamps();
 
             // foreign key
-            $table->foreign('id_aset')->references('id')->on('asets');
+            $table->foreign('id_aset')->references('id')->on('asets')->onDelete('cascade');;
         });
     }
 

@@ -19,7 +19,9 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header bg-teal">
-                <h1 class="card-title">Detail Data Aset {{ data.nama_aset }}</h1>
+                <h1 class="card-title">
+                  Detail Data Aset {{ data.nama_aset }}
+                </h1>
               </div>
               <div class="card-body">
                 <div class="form-group">
@@ -116,23 +118,59 @@
                   <img :src="url_gambar" alt="Gambar aset" class="img-fluid" />
                 </div>
 
-                <template v-if="data.divisi != divisi ">
+                <template v-if="data.divisi != divisi">
                   <div class="alert alert-danger alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                  Tidak dapat mengkonfirmasi pemindaian aset, aset tersebut bukan properti divisi anda
-                </div>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-hidden="true"
+                    >
+                      ×
+                    </button>
+                    <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                    Tidak dapat mengkonfirmasi pemindaian aset, aset tersebut
+                    bukan properti divisi anda
+                  </div>
+                  <router-link
+                    :to="{ name: 'scan' }"
+                    class="btn btn-block btn-secondary btn-flat"
+                    >Back Scan</router-link
+                  >
                 </template>
                 <template v-else>
                   <template v-if="jadwal">
-                    <button type="button" class="btn btn-block bg-teal btn-flat">Scan Aset</button>
+                    <button
+                      type="button"
+                      class="btn btn-block bg-teal btn-flat"
+                      @click="submit"
+                    >
+                      Scan Aset
+                    </button>
+                    <router-link
+                      :to="{ name: 'scan' }"
+                      class="btn btn-block btn-secondary btn-flat"
+                      >Back Scan</router-link
+                    >
                   </template>
                   <template v-else>
                     <div class="alert alert-info alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <h5><i class="icon fas fa-info"></i> Alert!</h5>
-                  Saat ini tidak ada jadwal pemindaian aset
-                </div>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="alert"
+                        aria-hidden="true"
+                      >
+                        ×
+                      </button>
+                      <h5><i class="icon fas fa-info"></i> Alert!</h5>
+                      Saat ini tidak ada jadwal pemindaian aset
+                    </div>
+                    <router-link
+                      :to="{ name: 'scan' }"
+                      class="btn btn-block btn-secondary btn-flat"
+                      >Back Scan</router-link
+                    >
                   </template>
                 </template>
               </div>
@@ -177,11 +215,35 @@ export default {
       let uri = "/api/jadwal/" + divisi + "/check";
 
       await axios.get(uri).then((response) => {
-        this.jadwal = response.data.data[0]
+        this.jadwal = response.data.data[0];
         // console.log(response)
       });
 
-      console.log(this.jadwal);
+      // console.log(this.jadwal);
+    },
+
+    async submit() {
+      try {
+        this.form.id_jadwal = this.jadwal.id;
+        this.form.id_aset = this.data.id;
+        let uri = "/api/scan/store";
+        let response = await axios.post(uri, this.form);
+
+        if (response.status == 200) {
+          this.$toasted.show(response.data.message, {
+            type: response.data.status,
+            duration: 3000,
+          });
+        }
+      } catch (e) {
+        console.log(e.response.data.errors);
+        this.errors = e.response.data.errors;
+
+        this.$toasted.show("Something went wrong...", {
+          type: "error",
+          duration: 3000,
+        });
+      }
     },
   },
 
@@ -201,9 +263,11 @@ export default {
         updated_at: "",
       },
 
+      form: {},
+
       url_gambar: "",
 
-      divisi : localStorage.getItem('divisi'),
+      divisi: localStorage.getItem("divisi"),
 
       // check jadwal
       jadwal: null,

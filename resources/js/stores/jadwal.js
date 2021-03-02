@@ -2,6 +2,8 @@ import $axios from '../api.js'
 
 const state = () => ({
     jadwals: [], //UNTUK MENAMPUNG DATA JadwalS YANG DIDAPATKAN DARI DATABASE
+    jadwals_future : [],
+    jadwals_past: [],
 
     //UNTUK MENAMPUNG VALUE DARI FORM INPUTAN NANTINYA
     //STATE INI AKAN DIGUNAKAN PADA FORM ADD Jadwal YANG AKAN DIBAHAS KEMUDIAN
@@ -10,7 +12,10 @@ const state = () => ({
         divisi: '',
         tanggal: '',
     },
-    page: 1 //UNTUK MENCATAT PAGE PAGINATE YANG SEDANG DIAKSES
+
+    page: 1, //UNTUK MENCATAT PAGE PAGINATE YANG SEDANG DIAKSES
+    page_future: 1, //UNTUK MENCATAT PAGE PAGINATE YANG SEDANG DIAKSES
+    page_past: 1 //UNTUK MENCATAT PAGE PAGINATE YANG SEDANG DIAKSES
 })
 
 const mutations = {
@@ -18,9 +23,28 @@ const mutations = {
     ASSIGN_DATA(state, payload) {
         state.jadwals = payload
     },
+
+    //MEMASUKKAN DATA KE STATE JadwalS
+    ASSIGN_DATA_FUTURE(state, payload) {
+        state.jadwals_future = payload
+    },
+
+    //MEMASUKKAN DATA KE STATE JadwalS
+    ASSIGN_DATA_PAST(state, payload) {
+        state.jadwals_past = payload
+    },
+
     //MENGUBAH DATA STATE PAGE
     SET_PAGE(state, payload) {
         state.page = payload
+    },
+
+    SET_PAGE_FUTURE(state, payload) {
+        state.page_future = payload
+    },
+
+    SET_PAGE_PAST(state, payload) {
+        state.page_past = payload
     },
 }
 
@@ -28,13 +52,27 @@ const actions = {
     //FUNGSI INI UNTUK MELAKUKAN REQUEST DATA jadwal DARI SERVER
     getJadwals({ commit, state }, payload) {
         //MENGECEK PAYLOAD ADA ATAU TIDAK
-        let search = typeof payload != 'undefined' ? payload : ''
+        let search1 = typeof payload != 'undefined' ? payload : ''
         return new Promise((resolve, reject) => {
             //REQUEST DATA DENGAN ENDPOINT /JadwalS
-            $axios.get(`/jadwal?page=${state.page}&q=${search}`)
+            $axios.get(`/jadwal?page=${state.page}&q=${search1}`)
                 .then((response) => {
                     //SIMPAN DATA KE STATE MELALUI MUTATIONS
                     commit('ASSIGN_DATA', response.data)
+                    resolve(response.data)
+                })
+        })
+    },
+
+    getJadwalsPast({ commit, state }, payload) {
+        //MENGECEK PAYLOAD ADA ATAU TIDAK
+        let search = typeof payload != 'undefined' ? payload : ''
+        return new Promise((resolve, reject) => {
+            //REQUEST DATA DENGAN ENDPOINT /JadwalS
+            $axios.get(`/jadwal/data-past?page=${state.page_past}&q=${search}`)
+                .then((response) => {
+                    //SIMPAN DATA KE STATE MELALUI MUTATIONS
+                    commit('ASSIGN_DATA_PAST', response.data)
                     resolve(response.data)
                 })
         })
@@ -52,6 +90,40 @@ const actions = {
                 .then((response) => {
                     //SIMPAN DATA KE STATE MELALUI MUTATIONS
                     commit('ASSIGN_DATA', response.data)
+                    resolve(response.data)
+                })
+        })
+    },
+
+    //FUNGSI INI UNTUK MELAKUKAN REQUEST DATA Jadwal DARI SERVER
+    getJadwalsDivFuture({ commit, state }, payload,) {
+        //MENGECEK PAYLOAD ADA ATAU TIDAK
+        let search = typeof payload != 'undefined' ? payload : ''
+        // let div = this
+        let div = localStorage.getItem('divisi')
+        return new Promise((resolve, reject) => {
+            //REQUEST DATA DENGAN ENDPOINT /JadwalS
+            $axios.get(`/jadwal/${div}/data-future?page=${state.page_future}&q=${search}`)
+                .then((response) => {
+                    //SIMPAN DATA KE STATE MELALUI MUTATIONS
+                    commit('ASSIGN_DATA_FUTURE', response.data)
+                    resolve(response.data)
+                })
+        })
+    },
+
+    //FUNGSI INI UNTUK MELAKUKAN REQUEST DATA Jadwal DARI SERVER
+    getJadwalsDivPast({ commit, state }, payload,) {
+        //MENGECEK PAYLOAD ADA ATAU TIDAK
+        let search = typeof payload != 'undefined' ? payload : ''
+        // let div = this
+        let div = localStorage.getItem('divisi')
+        return new Promise((resolve, reject) => {
+            //REQUEST DATA DENGAN ENDPOINT /JadwalS
+            $axios.get(`/jadwal/${div}/data-past?page=${state.page_past}&q=${search}`)
+                .then((response) => {
+                    //SIMPAN DATA KE STATE MELALUI MUTATIONS
+                    commit('ASSIGN_DATA_PAST', response.data)
                     resolve(response.data)
                 })
         })

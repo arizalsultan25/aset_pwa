@@ -44,12 +44,31 @@ Route::prefix('laporan')->namespace('API')->group(function(){
 });
 
 Route::prefix('jadwal')->namespace('API')->group(function(){
+    // Route admin
     Route::get('data', 'JadwalController@index');
+    Route::get('data-past', 'JadwalController@indexPast');
+
+    // Route Divisi
     Route::get('{divisi}/data', 'JadwalController@indexDiv');
+    Route::get('{divisi}/data-past', 'JadwalController@indexDivPast');
+    Route::get('{divisi}/data-future', 'JadwalController@indexDivFuture');
+    
+    
     Route::get('{divisi}/check', 'JadwalController@CheckDivisi');
+    Route::get('{id}/detail', 'JadwalController@detail');
     Route::post('store', 'JadwalController@store');
     Route::post('/{id}/edit', 'LaporanController@update');
     Route::delete('delete/{id}', 'JadwalController@delete');
+});
+
+Route::prefix('scan')->namespace('API')->group(function(){
+    Route::get('{id}/data', 'ScanController@detail');
+    Route::get('{divisi}/data', 'JadwalController@indexDiv');
+    Route::get('{divisi}/check', 'JadwalController@CheckDivisi');
+    Route::get('{id}/detail', 'JadwalController@detail');
+    Route::post('store', 'ScanController@store');
+    Route::post('/{id}/edit', 'LaporanController@update');
+    Route::delete('delete/{id}', 'ScanController@delete');
 });
 
 Route::prefix('users')->namespace('API')->group(function(){

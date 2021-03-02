@@ -47,7 +47,9 @@
             />
           </div>
           <div class="info">
-            <router-link  :to="{ name: 'profile' }" class="d-block">{{ $store.state.data.name }}</router-link>
+            <router-link :to="{ name: 'profile' }" class="d-block">{{
+              $store.state.data.name
+            }}</router-link>
           </div>
         </div>
 
@@ -81,18 +83,21 @@
             <li class="nav-item" v-if="$store.state.data.role == 0">
               <router-link :to="{ name: 'jadwal.data' }" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt text-teal"></i>
-                <p>
-                  Jadwal Pemindaian Aset
-                </p>
+                <p>Jadwal Pemindaian Aset</p>
               </router-link>
             </li>
 
             <li class="nav-item" v-if="$store.state.data.role == 1">
               <router-link :to="{ name: 'property.data' }" class="nav-link">
                 <i class="nav-icon fas fa-boxes text-teal"></i>
-                <p>
-                  Aset
-                </p>
+                <p>Aset</p>
+              </router-link>
+            </li>
+
+            <li class="nav-item" v-if="$store.state.data.role == 1">
+              <router-link :to="{ name: 'jadwal-scan.data' }" class="nav-link">
+                <i class="nav-icon far fa-calendar-alt text-teal"></i>
+                <p>Lihat Jadwal Scan Aset</p>
               </router-link>
             </li>
 
@@ -176,14 +181,13 @@ export default {
         this.$router.push("/login");
       });
     },
-
   },
   computed: {
     ...mapState("user", {
       authenticated: (state) => state.authenticated,
     }),
   },
-  
+
   data() {
     return {
       nama: this.$store.state.data.name,

@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\JadwalScan;
 use App\Http\Resources\JadwalCollection;
+use App\Scan;
+use App\Aset;
 use Illuminate\Support\Facades\Date;
 
 class JadwalController extends Controller
 {
-    //index
+    //index data jadwal yang belum berlalu
     public function index()
     {
-        $jadwal = JadwalScan::orderBy('created_at', 'DESC');
+        $jadwal = JadwalScan::orderBy('created_at', 'DESC')->where('tanggal', '>=', date('Y-m-d'));
         if (request()->q != '') {
             $jadwal = $jadwal->where('judul', 'LIKE', '%' . request()->q . '%')
                 ->orWhere('divisi', 'LIKE', '%' . request()->q . '%')
@@ -22,15 +24,53 @@ class JadwalController extends Controller
         return new JadwalCollection($jadwal->paginate(10));
     }
 
-    //index Divisi
+    //index data jadwal yang telah berlalu
+    public function indexPast()
+    {
+        $jadwal = JadwalScan::orderBy('created_at', 'DESC')->where('tanggal', '<', date('Y-m-d'));
+        if (request()->q != '') {
+            $jadwal = $jadwal->where('judul', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('divisi', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('tanggal', 'LIKE', '%' . request()->q . '%');
+        }
+        return new JadwalCollection($jadwal->paginate(10));
+    }
+
+    //index Divisi Hari ini
     public function indexDiv($divisi)
     {
-        $jadwal = JadwalScan::orderBy('created_at', 'DESC')->where('divisi', $divisi);
+        $jadwal = JadwalScan::orderBy('created_at', 'DESC')->where('divisi', $divisi)->where('tanggal', date('Y-m-d'));
         if (request()->q != '') {
             $jadwal = $jadwal->where('judul', 'LIKE', '%' . request()->q . '%')
                 ->orWhere('divisi', 'LIKE', '%' . request()->q . '%')
                 ->orWhere('tanggal', 'LIKE', '%' . request()->q . '%')
-                ->andWhere('divisi', $divisi);
+                ->where('divisi', $divisi);
+        }
+        return new JadwalCollection($jadwal->paginate(10));
+    }
+
+    //index Divisi akan datang
+    public function indexDivFuture($divisi)
+    {
+        $jadwal = JadwalScan::orderBy('created_at', 'DESC')->where('divisi', $divisi)->where('tanggal', '>',date('Y-m-d'));
+        if (request()->q != '') {
+            $jadwal = $jadwal->where('judul', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('divisi', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('tanggal', 'LIKE', '%' . request()->q . '%')
+                ->where('divisi', $divisi);
+        }
+        return new JadwalCollection($jadwal->paginate(10));
+    }
+
+    // index Divisi past
+    public function indexDivPast($divisi)
+    {
+        $jadwal = JadwalScan::orderBy('created_at', 'DESC')->where('divisi', $divisi)->where('tanggal', '<',date('Y-m-d'));
+        if (request()->q != '') {
+            $jadwal = $jadwal->where('judul', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('divisi', 'LIKE', '%' . request()->q . '%')
+                ->orWhere('tanggal', 'LIKE', '%' . request()->q . '%')
+                ->where('divisi', $divisi);
         }
         return new JadwalCollection($jadwal->paginate(10));
     }
@@ -83,4 +123,6 @@ class JadwalController extends Controller
             'tanggal' => $tgl
         ]);
     }
+
+    
 }

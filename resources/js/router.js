@@ -21,6 +21,7 @@ import EditUser from './pages/users/Edit.vue'
 // IMPORT HALAMAN SCAN
 import IndexScan from './pages/scan/Index.vue'
 import DetailScan from './pages/scan/Detail.vue'
+import HasilScan from './pages/scan/Hasil.vue'
 
 // IMPORT HALAMAN PROFILE
 import Profile from './pages/profile/Index.vue'
@@ -45,6 +46,10 @@ import DetailAsetDiv from './pages/aset_divisi/Detail.vue'
 import IndexJadwal from './pages/jadwal/Index.vue'
 import Jadwal from './pages/jadwal/Jadwal.vue'
 import AddJadwal from './pages/jadwal/Add.vue'
+
+// IMPORT HALAMAN JADWAL ASET DIVISI
+import IndexJadwalDiv from './pages/jadwal_divisi/Index.vue'
+import JadwalDiv from './pages/jadwal_divisi/Jadwal.vue'
 
 Vue.use(Router)
 
@@ -139,6 +144,16 @@ const router = new Router({
             meta: {
                 requiresAuth: true,
                 title: 'Detail Aset'
+            }
+        },
+
+        {
+            path: '/scan-result/:id',
+            name: 'scan.result',
+            component: HasilScan,
+            meta: {
+                requiresAuth: true,
+                title: 'Hasil Pemindaian Aset'
             }
         },
 
@@ -246,6 +261,20 @@ const router = new Router({
                     component: AddJadwal,
                     meta: { title: 'Create Schedule' }
                 },
+            ]
+         },
+
+         // Route Jadwal Aset Divisi
+        {
+            path: '/jadwal-scan',
+            component: IndexJadwalDiv,
+            children: [
+                {
+                    path: '',
+                    name: 'jadwal-scan.data',
+                    component: JadwalDiv,
+                    meta: { title: 'Jadwal Pemindaian Aset' }
+                }
             ]
          },
 

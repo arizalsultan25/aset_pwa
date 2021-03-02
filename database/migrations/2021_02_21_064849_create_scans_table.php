@@ -21,8 +21,8 @@ class CreateScansTable extends Migration
             $table->timestamps();
 
             // foreign key
-            $table->foreign('id_jadwal')->references('id')->on('jadwal_scans');
-            $table->foreign('id_aset')->references('id')->on('asets');
+            $table->foreign('id_jadwal')->references('id')->on('jadwal_scans')->onDelete('cascade');;
+            $table->foreign('id_aset')->references('id')->on('asets')->onDelete('cascade');;
         });
     }
 
