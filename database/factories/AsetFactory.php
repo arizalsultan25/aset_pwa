@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Aset::class, function (Faker $faker) {
     $qr = Str::random(16);
-    $jenis = $faker->randomElement(['Elektronik', 'Dokumen', 'Furnitur', 'Kendaraan']); 
+    $jenis = $faker->randomElement(['Elektronik', 'Dokumen', 'Furniture', 'Kendaraan']); 
 
     return [
         'nama_aset' => $faker->word(2),

@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class AsetController extends Controller
 {
-    //index
+    //Tampil seluruh data aset
     public function index()
     {
         $asets = Aset::orderBy('created_at', 'DESC');
@@ -28,7 +28,7 @@ class AsetController extends Controller
     //index data aset divisi
     public function index_div($divisi)
     {
-        $asets = Aset::orderBy('created_at', 'DESC')->where('divisi',$divisi);
+        $asets = Aset::orderBy('created_at', 'DESC')->where('divisi', $divisi);
         if (request()->q != '') {
             $asets = $asets->where('nama_aset', 'LIKE', '%' . request()->q . '%')
                 ->orWhere('qr', 'LIKE', '%' . request()->q . '%')
@@ -40,6 +40,7 @@ class AsetController extends Controller
         return new AsetCollection($asets->paginate(10));
     }
 
+    // Simpan data aset
     public function store()
     {
         // Generate random string 16 digit
@@ -55,6 +56,7 @@ class AsetController extends Controller
             // 'gambar' => 'image'
         ]);
 
+        // Jika ada upload gambar
         if (request('gambar') !== null) {
             $explode = explode(',', request('gambar'));
             $gambar = base64_decode($explode[1]);
@@ -62,8 +64,10 @@ class AsetController extends Controller
             if (str_contains($explode[0], 'png')) {
                 $extension = 'png';
             }
+            // Letak file
             $path = public_path() . '\gambar\asets\\' . $random . '.' . $extension;
 
+            // Pindahkan gambar ke directory yang ditentukan
             file_put_contents($path, $gambar);
         }
 
@@ -86,12 +90,14 @@ class AsetController extends Controller
     }
 
 
+    // ambil data aset berdasarkan Kode QR
     public function edit($id)
     {
         $aset = Aset::whereQr($id)->first();
         return response()->json(['status' => 'success', 'data' => $aset], 200);
     }
 
+    // Ubah data aset
     public function update($id)
     {
         // Form Validasi
@@ -102,6 +108,7 @@ class AsetController extends Controller
             'divisi' => 'required',
         ]);
 
+        // Parsing data aset
         $data = [
             'nama_aset' => request('nama_aset'),
             'jenis' => request('jenis'),
@@ -109,6 +116,7 @@ class AsetController extends Controller
             'divisi' => request('divisi'),
         ];
 
+        // Jika ada gambar
         if (request('gambar') !== null) {
             $explode = explode(',', request('gambar'));
             $gambar = base64_decode($explode[1]);
@@ -119,11 +127,13 @@ class AsetController extends Controller
             file_put_contents($path, $gambar);
         }
 
+        // Update data
         $aset = Aset::whereQr($id)->first();
         $aset->update($data);
         return response()->json(['status' => 'success', 'data' => $data], 200);
     }
 
+    // Delete data
     public function destroy($id)
     {
         $aset = Aset::find($id);
@@ -132,5 +142,67 @@ class AsetController extends Controller
         }
         $aset->delete();
         return response()->json(['status' => 'success'], 200);
+    }
+
+    // Data untuk Dashboard Staf
+    public function homeStaf($divisi)
+    {
+        $total = Aset::whereDivisi($divisi)->count();
+        $ok = Aset::whereDivisi($divisi)->whereStatus('baik')->count();
+        $rusak = Aset::whereDivisi($divisi)->whereStatus('rusak')->count();
+
+        $elektronik = Aset::whereDivisi($divisi)->whereJenis('elektronik')->count();
+        $furniture = Aset::whereDivisi($divisi)->whereJenis('furniture')->count();
+        $kendaraan = Aset::whereDivisi($divisi)->whereJenis('kendaraan')->count();
+        $dokumen = Aset::whereDivisi($divisi)->whereJenis('dokumen')->count();
+
+        return response()->json([
+            'jumlah' => [
+                'total' => $total,
+                'ok' => $ok,
+                'rusak' => $rusak,
+            ],
+
+            'category' => [
+                'elektronik' => $elektronik,
+                'furniture' => $furniture,
+                'kendaraan' => $kendaraan,
+                'dokumen' => $dokumen,
+            ],
+        ]);
+    }
+
+    // Data Dashboard Admin
+    public function home()
+    {
+        $total = Aset::count();
+
+        $it = Aset::whereDivisi('IT Support')->count();
+        $fin = Aset::whereDivisi('Finance')->count();
+        $hr = Aset::whereDivisi('Human Resource')->count();
+        $prod = Aset::whereDivisi('Production')->count();
+
+        $elektronik = Aset::whereJenis('elektronik')->count();
+        $furniture = Aset::whereJenis('furniture')->count();
+        $kendaraan = Aset::whereJenis('kendaraan')->count();
+        $dokumen = Aset::whereJenis('dokumen')->count();
+
+        return response()->json([
+            'jumlah' => [
+                'it' => $it,
+                'fin' => $fin,
+                'hr' => $hr,
+                'prod' => $prod
+            ],
+
+            'category' => [
+                'elektronik' => $elektronik,
+                'furniture' => $furniture,
+                'kendaraan' => $kendaraan,
+                'dokumen' => $dokumen,
+            ],
+
+            'total' => $total,
+        ]);
     }
 }

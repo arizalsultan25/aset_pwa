@@ -72,6 +72,22 @@ const actions = {
     },
 
     //FUNGSI INI UNTUK MELAKUKAN REQUEST DATA aset DARI SERVER
+    getScannedAsets({ commit, state }, payload1, payload) {
+        //MENGECEK PAYLOAD ADA ATAU TIDAK
+        let id = typeof payload1 != 'undefined' ? payload1 : ''
+        let search = typeof payload != 'undefined' ? payload : ''
+        return new Promise((resolve, reject) => {
+            //REQUEST DATA DENGAN ENDPOINT /AsetS
+            $axios.get(`/scan/${id}/data?page=${state.page}&q=${search}`)
+                .then((response) => {
+                    //SIMPAN DATA KE STATE MELALUI MUTATIONS
+                    commit('ASSIGN_DATA', response.data)
+                    resolve(response.data)
+                })
+        })
+    },
+
+    //FUNGSI INI UNTUK MELAKUKAN REQUEST DATA aset DARI SERVER
     getAsetsDiv({ commit, state }, payload,) {
         //MENGECEK PAYLOAD ADA ATAU TIDAK
         let search = typeof payload != 'undefined' ? payload : ''

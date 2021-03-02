@@ -134,6 +134,14 @@
                       >Settings</a
                     >
                   </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      href="#change-password"
+                      data-toggle="tab"
+                      >Ubah Password</a
+                    >
+                  </li>
                 </ul>
               </div>
               <!-- /.card-header -->
@@ -442,6 +450,7 @@
                             type="text"
                             class="form-control"
                             :value="data.id"
+                            disabled
                           />
                         </div>
                       </div>
@@ -453,7 +462,7 @@
                           <input
                             type="email"
                             class="form-control"
-                            :value="data.email"
+                            v-model="data.email"
                           />
                         </div>
                       </div>
@@ -465,7 +474,66 @@
                           <input
                             type="text"
                             class="form-control"
-                            :value="data.nama"
+                            v-model="data.nama"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="submit" class="btn btn-danger">
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.tab-pane -->
+
+                  <div class="tab-pane" id="change-password">
+                    <form
+                      class="form-horizontal"
+                      @submit.prevent="changePassword"
+                    >
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label"
+                          >Password Lama</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="password"
+                            maxlength="12"
+                            placeholder="Password lama"
+                            class="form-control"
+                            v-model="form.pass_lama"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label"
+                          >Password Baru</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="password"
+                            maxlength="12"
+                            placeholder="Password baru"
+                            v-model="form.pass_baru"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label"
+                          >Konfirmasi Password Baru</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="password"
+                            maxlength="12"
+                            v-model="form.pass_confirm"
+                            placeholder="Konfirmasi Password baru"
+                            class="form-control"
                           />
                         </div>
                       </div>
@@ -516,6 +584,12 @@ export default {
         email: "",
         id: "",
       },
+
+      form : {
+        pass_baru: null,
+        pass_lama: null,
+        pass_confirm: null
+      }
     };
   },
   methods: {
@@ -533,11 +607,19 @@ export default {
       // localStorage.setItem("nama", this.data.nama)
       // this.$store.state.data.name = localStorage.getItem("nama");
       console.log(this.data);
-      this.$toasted.show("Data Pengguna telah diperbarui", {
+      this.$toasted.show("Data Pengguna telah diperbarui, perubahan akan diterapkan setelah logout", {
         type: "success",
         duration: 3000,
       });
     },
+
+    changePassword(){
+      console.log(this.form);
+      this.$toasted.show("Password telah diperbarui", {
+        type: "success",
+        duration: 3000,
+      });
+    }
   },
 };
 </script>

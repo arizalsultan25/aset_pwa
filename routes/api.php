@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 Route::prefix('asets')->namespace('API')->group(function(){
     Route::get('data', 'AsetController@index');
+    Route::get('home', 'AsetController@home');
+    Route::get('{divisi}/home', 'AsetController@homeStaf');
     Route::get('{divisi}/data', 'AsetController@index_div');
     Route::post('store', 'AsetController@store');
     Route::post('/{id}/edit', 'AsetController@update');
@@ -62,10 +64,10 @@ Route::prefix('jadwal')->namespace('API')->group(function(){
 });
 
 Route::prefix('scan')->namespace('API')->group(function(){
-    Route::get('{id}/data', 'ScanController@detail');
+    Route::get('{id}/data', 'ScanController@index');
     Route::get('{divisi}/data', 'JadwalController@indexDiv');
     Route::get('{divisi}/check', 'JadwalController@CheckDivisi');
-    Route::get('{id}/detail', 'JadwalController@detail');
+    Route::get('{id}/detail', 'ScanController@detail');
     Route::post('store', 'ScanController@store');
     Route::post('/{id}/edit', 'LaporanController@update');
     Route::delete('delete/{id}', 'ScanController@delete');

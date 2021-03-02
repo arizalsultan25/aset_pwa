@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './pages/Home.vue'
+import HomeStaf from './pages/HomeStaf.vue'
 import Login from './pages/Login.vue'
 import store from './store.js'
 
@@ -61,6 +62,12 @@ const router = new Router({
             path: '/',
             name: 'home',
             component: Home,
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/dashboard',
+            name: 'home.staf',
+            component: HomeStaf,
             meta: { requiresAuth: true }
         },
         {
