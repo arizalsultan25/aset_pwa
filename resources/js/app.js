@@ -13,6 +13,8 @@ import VueSimpleAlert from "vue-simple-alert";
 import VueQrcode from '@chenfengyuan/vue-qrcode';
 import VueQrcodeReader from "vue-qrcode-reader";
 import VueMoment from 'vue-moment'
+import Chart from 'chart.js';
+
 
 // Implementasi library pada Vue Js
 Vue.use(BootstrapVue)

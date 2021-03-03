@@ -57,6 +57,7 @@ Route::prefix('jadwal')->namespace('API')->group(function(){
     
     
     Route::get('{divisi}/check', 'JadwalController@CheckDivisi');
+    Route::get('{divisi}/next', 'JadwalController@CheckSchedule');
     Route::get('{id}/detail', 'JadwalController@detail');
     Route::post('store', 'JadwalController@store');
     Route::post('/{id}/edit', 'LaporanController@update');
@@ -75,6 +76,9 @@ Route::prefix('scan')->namespace('API')->group(function(){
 
 Route::prefix('users')->namespace('API')->group(function(){
     Route::post('store', 'UserController@store');
+    Route::post('update/{token}', 'UserController@update');
+    Route::post('change-password/{token}', 'UserController@changePassword');
 });
+
 
 Route::get('user-authenticated/{token}', 'API\UserController@getUserLogin')->name('user.authenticated');

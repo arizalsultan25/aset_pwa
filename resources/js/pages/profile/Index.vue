@@ -585,11 +585,11 @@ export default {
         id: "",
       },
 
-      form : {
+      form: {
         pass_baru: null,
         pass_lama: null,
-        pass_confirm: null
-      }
+        pass_confirm: null,
+      },
     };
   },
   methods: {
@@ -603,23 +603,70 @@ export default {
       });
     },
 
-    editProfile() {
+    async editProfile() {
       // localStorage.setItem("nama", this.data.nama)
       // this.$store.state.data.name = localStorage.getItem("nama");
-      console.log(this.data);
-      this.$toasted.show("Data Pengguna telah diperbarui, perubahan akan diterapkan setelah logout", {
-        type: "success",
-        duration: 3000,
-      });
+      try {
+        // console.log(this.data);
+        let token = localStorage.getItem('token')
+        let uri = "/api/users/update/"+token;
+        let response = await axios.post(uri, this.data)
+          if (response.status == 200) {
+            this.$toasted.show(
+              "Data Pengguna telah diperbarui, perubahan akan diterapkan setelah logout",
+              {
+                type: "success",
+                duration: 3000,
+              }
+            );
+          }
+      } catch (e) {
+        this.errors = e.response.data.errors;
+
+        this.$toasted.show("Something went wrong...", {
+          type: "error",
+          duration: 3000,
+        });
+      }
     },
 
-    changePassword(){
-      console.log(this.form);
-      this.$toasted.show("Password telah diperbarui", {
-        type: "success",
-        duration: 3000,
-      });
+    async changePassword() {
+      try {
+        // console.log(this.data);
+
+        if(this.form.pass_baru !== this.form.pass_confirm){
+          this.$toasted.show("password konfirmasi tidak cocok", {
+          type: "error",
+          duration: 3000,
+        });
+        return 0
+        }
+
+        let token = localStorage.getItem('token')
+        let uri = "/api/users/change-password/"+token;
+        let response = await axios.post(uri, this.form)
+          if (response.status == 200) {
+            this.$toasted.show(
+              response.data.message,
+              {
+                type: response.data.status,
+                duration: 3000,
+              });
+
+              this.form.pass_baru = ''
+              this.form.pass_lama = ''
+              this.form.pass_confirm = ''
+          }
+      } catch (e) {
+        this.errors = e.response.data.errors;
+
+        this.$toasted.show("Something went wrong...", {
+          type: "error",
+          duration: 3000,
+        });
+      }
     }
+     
   },
 };
 </script>

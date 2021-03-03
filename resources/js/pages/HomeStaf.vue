@@ -9,7 +9,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <router-link to="/dahshboard">Home</router-link>
+                <router-link to="/dashboard">Home</router-link> /
               </li>
             </ol>
           </div>
@@ -20,6 +20,35 @@
 
     <section class="content">
       <div class="container-fluid">
+        <h5 class="mt-4 mb-2">Jadwal Pemindaian Aset</h5>
+        <div class="row">
+          <template v-if="jadwal != ''">
+            <div class="col-md-12">
+              <div class="callout callout-info" v-for="(d, index) in jadwal">
+                <h5>{{ d.judul }}</h5>
+
+                <p>
+                  Terdapat jadwal pemindaian aset untuk tanggal :
+                  <span class="badge badge-danger">
+                    {{ d.tanggal | moment("ddd, D MMM YYYY") }}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <div class="col-md-12">
+              <div class="callout callout-success">
+                <h5>Tidak ada jadwal</h5>
+
+                <p>
+                  Saat ini tidak tersedia jadwal pemindaian untuk divisi anda.
+                </p>
+              </div>
+            </div>
+          </template>
+        </div>
+
         <h5 class="mt-4 mb-2">Informasi Jumlah Aset</h5>
         <div class="row">
           <div class="col-md-4 col-sm-6 col-12">
@@ -30,7 +59,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Aset</span>
-                <span class="info-box-number">{{data.total}}</span>
+                <span class="info-box-number">{{ data.total }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -45,7 +74,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Aset OK</span>
-                <span class="info-box-number">{{data.ok}}</span>
+                <span class="info-box-number">{{ data.ok }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -59,7 +88,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Aset Rusak</span>
-                <span class="info-box-number">{{data.rusak}}</span>
+                <span class="info-box-number">{{ data.rusak }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -74,7 +103,7 @@
             <!-- small card -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>{{data.elektronik}}</h3>
+                <h3>{{ data.elektronik }}</h3>
 
                 <p>Elektronik</p>
               </div>
@@ -88,7 +117,7 @@
             <!-- small card -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>{{data.furniture}}</h3>
+                <h3>{{ data.furniture }}</h3>
 
                 <p>Furniture</p>
               </div>
@@ -102,7 +131,7 @@
             <!-- small card -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>{{data.kendaraan}}</h3>
+                <h3>{{ data.kendaraan }}</h3>
 
                 <p>Kendaraan</p>
               </div>
@@ -116,7 +145,7 @@
             <!-- small card -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>{{data.dokumen}}</h3>
+                <h3>{{ data.dokumen }}</h3>
 
                 <p>Dokumen</p>
               </div>
@@ -129,111 +158,62 @@
         </div>
 
         <div class="row" style="margin-top: 1%">
-          <div class="col-md-6">
-            <div class="card card-default">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-exclamation-triangle"></i>
-                  Alerts
-                </h3>
+          <div class="col-md-5">
+            <!-- PIE CHART -->
+            <div class="card">
+              <div class="card-header bg-teal">
+                <h3 class="card-title">Statistik Kondisi Aset</h3>
+
+                <div class="card-tools">
+                  <button
+                    type="button"
+                    class="btn btn-tool"
+                    data-card-widget="collapse"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
-                <div class="alert alert-danger alert-dismissible">
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="alert"
-                    aria-hidden="true"
-                  >
-                    ×
-                  </button>
-                  <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                  Danger alert preview. This alert is dismissable. A wonderful
-                  serenity has taken possession of my entire soul, like these
-                  sweet mornings of spring which I enjoy with my whole heart.
-                </div>
-                <div class="alert alert-info alert-dismissible">
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="alert"
-                    aria-hidden="true"
-                  >
-                    ×
-                  </button>
-                  <h5><i class="icon fas fa-info"></i> Alert!</h5>
-                  Info alert preview. This alert is dismissable.
-                </div>
-                <div class="alert alert-warning alert-dismissible">
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="alert"
-                    aria-hidden="true"
-                  >
-                    ×
-                  </button>
-                  <h5>
-                    <i class="icon fas fa-exclamation-triangle"></i> Alert!
-                  </h5>
-                  Warning alert preview. This alert is dismissable.
-                </div>
-                <div class="alert alert-success alert-dismissible">
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="alert"
-                    aria-hidden="true"
-                  >
-                    ×
-                  </button>
-                  <h5><i class="icon fas fa-check"></i> Alert!</h5>
-                  Success alert preview. This alert is dismissable.
-                </div>
+                <pie-chart
+                  v-if="loaded"
+                  :chartdata="datacollection"
+                  :options="options"
+                />
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+            <!-- /.card -->
           </div>
           <!-- /.col -->
 
-          <div class="col-md-6">
-            <div class="card card-default">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-bullhorn"></i>
-                  Callouts
-                </h3>
+          <div class="col-md-7">
+            <!-- PIE CHART -->
+            <div class="card">
+              <div class="card-header bg-primary">
+                <h3 class="card-title">Statistik Kategory Aset</h3>
+
+                <div class="card-tools">
+                  <button
+                    type="button"
+                    class="btn btn-tool"
+                    data-card-widget="collapse"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
-                <div class="callout callout-danger">
-                  <h5>I am a danger callout!</h5>
-
-                  <p>
-                    There is a problem that we need to fix. A wonderful serenity
-                    has taken possession of my entire soul, like these sweet
-                    mornings of spring which I enjoy with my whole heart.
-                  </p>
-                </div>
-                <div class="callout callout-info">
-                  <h5>I am an info callout!</h5>
-
-                  <p>Follow the steps to continue to payment.</p>
-                </div>
-                <div class="callout callout-warning">
-                  <h5>I am a warning callout!</h5>
-
-                  <p>This is a yellow callout.</p>
-                </div>
-                <div class="callout callout-success">
-                  <h5>I am a success callout!</h5>
-                  <p>This is a green callout.</p>
-                </div>
+                <bar-chart
+                  v-if="load_bar"
+                  :chartdata="data_bar"
+                  :options="options"
+                />
               </div>
               <!-- /.card-body -->
             </div>
+            <!-- /.card -->
             <!-- /.card -->
           </div>
           <!-- /.col -->
@@ -244,48 +224,123 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
+import PieChart from "../components/chart/pie.vue";
+import BarChart from '../components/chart/bar.vue'
 
 export default {
-    created() {
-      this.getData()
+  created() {
+    this.getData(), this.getJadwal();
+  },
+  components: {
+    PieChart,
+    BarChart
+  },
+
+  methods: {
+    async getData() {
+      let divisi = localStorage.getItem("divisi");
+      let uri = "/api/asets/" + divisi + "/home";
+
+      await axios.get(uri).then((response) => {
+        let res = response.data;
+
+        this.data.total = res.jumlah.total;
+        this.data.ok = res.jumlah.ok;
+        this.data.rusak = res.jumlah.rusak;
+
+        this.data.elektronik = res.category.elektronik;
+        this.data.kendaraan = res.category.kendaraan;
+        this.data.furniture = res.category.furniture;
+        this.data.dokumen = res.category.dokumen;
+      });
     },
 
-    methods: {
-      async getData(){
-        let divisi = localStorage.getItem('divisi')
-        let uri = '/api/asets/'+divisi+'/home'
+    async getJadwal() {
+      let divisi = localStorage.getItem("divisi");
+      let uri = "/api/jadwal/" + divisi + "/next";
 
-        await axios.get(uri).then((response) => {
-          let res = response.data
-
-          this.data.total = res.jumlah.total
-          this.data.ok = res.jumlah.ok
-          this.data.rusak = res.jumlah.rusak
-
-          this.data.elektronik = res.category.elektronik
-          this.data.kendaraan = res.category.kendaraan
-          this.data.furniture = res.category.furniture
-          this.data.dokumen = res.category.dokumen
-
-        })
-      }
+      await axios.get(uri).then((response) => {
+        let res = response.data;
+        // console.log(res)
+        this.jadwal = res.data;
+      });
     },
+  },
 
-    data(){
-      return {
-        data : {
-          total : '',
-          ok : '',
-          rusak : '',
+  async mounted() {
+    this.loaded = false;
+    this.load_bar = false
+    try {
+      let divisi = localStorage.getItem("divisi");
+      let uri = "/api/asets/" + divisi + "/home";
 
-          elektronik : '',
-          dokumen : '',
-          furnitur : '',
-          kendaraan : '',
-        },
-      }
+      await axios.get(uri).then((response) => {
+        let res = response.data;
+
+        this.datacollection = {
+          labels: ["Aset OK", "Aset Rusak"],
+          datasets: [
+            {
+              label: "Statistik Kondisi Aset",
+              backgroundColor: [
+                "#3AEB75",
+                "#EB3A64",
+              ],
+
+              data: [res.jumlah.ok, res.jumlah.rusak],
+            },
+          ],
+        };
+
+        this.data_bar = {
+          labels: ["Elektronik", "Furniture", "Kendaraan", "Dokumen"],
+          datasets: [
+            {
+              labels: ["Elektronik", "Furniture", "Kendaraan", "Dokumen"],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+
+              data: [res.category.elektronik, res.category.furniture, res.category.kendaraan, res.category.dokumen],
+            },
+          ],
+        };
+      });
+      this.loaded = true;
+      this.load_bar = true
+    } catch (e) {
+      console.error(e);
     }
+  },
+
+  data() {
+    return {
+      data: {
+        total: 0,
+        ok: 0,
+        rusak: 0,
+
+        elektronik: "",
+        dokumen: "",
+        furnitur: "",
+        kendaraan: "",
+      },
+
+      jadwal: [],
+
+      loaded: false,
+      datacollection: null,
+
+      load_bar : false,
+      data_bar : null
+    };
+  },
 };
 </script>
 

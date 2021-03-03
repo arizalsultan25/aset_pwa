@@ -199,7 +199,14 @@ export default {
           this.CLEAR_ERRORS();
           //MAKA AKAN DI-DIRECT KE ROUTE DENGAN NAME home
           this.loading = false
+
+          // Redirect Home berdasarkan hak akses
+          let role = localStorage.getItem('role')
+          if(role == 0){
           this.$router.push({ name: "home" });
+          }else{
+            this.$router.push({ name: "home.staf" });
+          }
         }
       });
     },

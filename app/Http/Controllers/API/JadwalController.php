@@ -110,12 +110,26 @@ class JadwalController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
 
-    // cekJadwal Divisi
+    // cekJadwal Divisi hari ini
     public function checkDivisi($divisi)
     {
         $tgl = Date('Y-m-d');
         $jadwal = JadwalScan::where('divisi', $divisi);
-        $jadwal = $jadwal->Where('tanggal', $tgl)->get();
+        $jadwal = $jadwal->where('tanggal', $tgl)->get();
+
+        return response()->json([
+            'divisi' => $divisi,
+            'data' => $jadwal,
+            'tanggal' => $tgl
+        ]);
+    }
+
+    // Check jadwal divisi yang belum berlalu
+    public function checkSchedule($divisi)
+    {
+        $tgl = Date('Y-m-d');
+        $jadwal = JadwalScan::where('divisi', $divisi);
+        $jadwal = $jadwal->where('tanggal', '>=',$tgl)->get();
 
         return response()->json([
             'divisi' => $divisi,

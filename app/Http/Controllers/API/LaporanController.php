@@ -34,14 +34,11 @@ class LaporanController extends Controller
             ->where('laporans.divisi', $divisi);
         if (request()->q != '') {
             $laporan = $laporan->where('laporans.id', 'LIKE', '%' . request()->q . '%')
+                
                 ->orWhere('laporans.id_aset', 'LIKE', '%' . request()->q . '%')
-                ->orWhere('laporans.divisi', 'LIKE', '%' . request()->q . '%')
-                ->orWhere('laporans.status', 'LIKE', '%' . request()->q . '%')
                 ->orWhere('laporans.judul', 'LIKE', '%' . request()->q . '%')
-
-                ->orWhere('asets.nama_aset', 'LIKE', '%' . request()->q . '%')
-                ->orWhere('asets.jenis', 'LIKE', '%' . request()->q . '%')
                 ->where('laporans.divisi', $divisi);
+                
         }
         return new LaporanCollection($laporan->paginate(10));
     }
