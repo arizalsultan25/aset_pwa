@@ -25,14 +25,24 @@
       class="main-sidebar sidebar-dark-primary elevation-4 sidebar-dark-olive"
     >
       <!-- Brand Logo -->
-      <router-link to="/" class="brand-link">
+      <router-link :to="{ name: 'home' }" class="brand-link"  v-if="$store.state.data.role == 0">
         <img
-          :src="'/dist/img/AdminLTELogo.png'"
-          alt="AdminLTE Logo"
+          :src="'/icon/Logo.png'"
+          alt="Logo Aset Tree"
           class="brand-image img-circle elevation-3"
           style="opacity: 0.8"
         />
-        <span class="brand-text font-weight-light">SMA</span>
+        <span class="brand-text font-weight-light">Aset Tree</span>
+      </router-link>
+
+      <router-link :to="{ name: 'home.staf' }" class="brand-link"  v-if="$store.state.data.role == 1">
+        <img
+          :src="'/icon/Logo.png'"
+          alt="Logo Aset Tree"
+          class="brand-image img-circle elevation-3"
+          style="opacity: 0.8"
+        />
+        <span class="brand-text font-weight-light">Aset Tree</span>
       </router-link>
 
       <!-- Sidebar -->

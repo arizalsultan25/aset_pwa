@@ -1,0 +1,27 @@
+{
+  "name": "Aset Tree",
+  "short_name": "AsetTree",
+  "icons": [
+    {
+      "src": "/icon/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+	{
+      "src": "/icon/logo256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/icon/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./",
+  "scope" : "./",
+  "background_color": "#20c997",
+  "theme_color": "#20c997",
+  "display": "standalone",
+  "orientation" : "potrait"
+}

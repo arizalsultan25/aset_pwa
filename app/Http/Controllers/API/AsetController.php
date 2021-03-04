@@ -176,6 +176,8 @@ class AsetController extends Controller
     public function home()
     {
         $total = Aset::count();
+        $ok = Aset::whereStatus('baik')->count();
+        $rusak = Aset::whereStatus('rusak')->count();
 
         $it = Aset::whereDivisi('IT Support')->count();
         $fin = Aset::whereDivisi('Finance')->count();
@@ -189,10 +191,9 @@ class AsetController extends Controller
 
         return response()->json([
             'jumlah' => [
-                'it' => $it,
-                'fin' => $fin,
-                'hr' => $hr,
-                'prod' => $prod
+                'total' => $total,
+                'ok' => $ok,
+                'rusak' => $rusak,
             ],
 
             'category' => [
@@ -200,6 +201,13 @@ class AsetController extends Controller
                 'furniture' => $furniture,
                 'kendaraan' => $kendaraan,
                 'dokumen' => $dokumen,
+            ],
+
+            'divisi' => [
+                'it' => $it,
+                'fin' => $fin,
+                'hr' => $hr,
+                'prod' => $prod
             ],
 
             'total' => $total,

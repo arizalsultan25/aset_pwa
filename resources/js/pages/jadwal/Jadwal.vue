@@ -160,9 +160,9 @@
 
               <template #cell(actions)="row">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-info">
+                  <router-link :to="{ name: 'scan.result', params: {id: row.item.id} }" class="btn btn-info">
                     Hasil Pemindaian
-                  </button>
+                  </router-link>
                   <button
                     type="button"
                     class="btn btn-danger"

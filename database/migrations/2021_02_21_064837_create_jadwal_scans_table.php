@@ -16,7 +16,7 @@ class CreateJadwalScansTable extends Migration
         Schema::create('jadwal_scans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('judul');
-            $table->string('divisi');
+            $table->enum('divisi', ['IT Support', 'Finance', 'Production', 'Human Resource']);
             $table->date('tanggal');
             $table->timestamps();
         });

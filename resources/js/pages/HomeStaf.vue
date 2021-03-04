@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Dashboard Staf</h1>
+            <h1>Dashboard Staf {{$store.state.data.divisi}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -54,7 +54,7 @@
           <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-info"
-                ><i class="far fa-envelope"></i
+                ><i class="fas fa-boxes"></i
               ></span>
 
               <div class="info-box-content">
@@ -69,7 +69,7 @@
           <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-success"
-                ><i class="far fa-flag"></i
+                ><i class="fas fa-check"></i
               ></span>
 
               <div class="info-box-content">
@@ -83,7 +83,7 @@
           <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-danger"
-                ><i class="far fa-star"></i
+                ><i class="fas fa-times"></i
               ></span>
 
               <div class="info-box-content">
@@ -108,7 +108,7 @@
                 <p>Elektronik</p>
               </div>
               <div class="icon">
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-tv"></i>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@
                 <p>Furniture</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fas fa-couch"></i>
               </div>
             </div>
           </div>
@@ -136,7 +136,7 @@
                 <p>Kendaraan</p>
               </div>
               <div class="icon">
-                <i class="fas fa-user-plus"></i>
+                <i class="fas fa-shuttle-van"></i>
               </div>
             </div>
           </div>
@@ -150,7 +150,7 @@
                 <p>Dokumen</p>
               </div>
               <div class="icon">
-                <i class="fas fa-chart-pie"></i>
+                <i class="fas fa-book"></i>
               </div>
             </div>
           </div>

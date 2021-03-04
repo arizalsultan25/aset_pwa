@@ -3,7 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sistem Manajemen Aset</title>
+
+  {{-- Keperluan PWA --}}
+  <link rel="icon" href="{{ asset('icon/Logo.png') }}" type="image/png">
+  <link rel="manifest" href="{{ asset('manifest.json?v2') }}">
+
+  <title>Aset Tree</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,9 +16,6 @@
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
@@ -41,5 +43,18 @@
 
 {{-- App Js --}}
 <script src="{{ asset('js/app.js') }}"></script>
+
+<script>
+  if('serviceWorker' in navigator){
+      // Register service worker
+      navigator.serviceWorker.register('sw.js').then(function(reg){
+          console.log("SW registration succeeded. Scope is "+reg.scope);
+      }).catch(function(err){
+          console.error("SW registration failed with error "+err);
+      });
+  }
+</script>
+<script src="{{ asset('A2HS.js') }}" ></script>
+
 </body>
 </html>
