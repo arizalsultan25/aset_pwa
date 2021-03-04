@@ -5,6 +5,8 @@
     </div>
     <strong>Copyright © 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
     reserved.
+    <br>
+    Created by : Sultan Arizal 
   </footer>
 </template>
 
