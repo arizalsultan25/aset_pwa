@@ -66,7 +66,7 @@ class UserController extends Controller
         request()->validate([
             'id' => 'required',
             'nama' => 'required',
-            'email' =>  ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' =>  ['required', 'string', 'email', 'max:255'],
         ]);
 
         // Parsing data

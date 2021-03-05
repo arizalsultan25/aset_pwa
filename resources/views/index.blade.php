@@ -7,6 +7,15 @@
   {{-- Keperluan PWA --}}
   <link rel="icon" href="{{ asset('icon/Logo.png') }}" type="image/png">
   <link rel="manifest" href="{{ asset('manifest.json?v2') }}">
+<!-- Add to home screen untuk Safari iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="apple-mobile-web-app-title" content="Template PWA"/>
+<link rel="apple-touch-icon" href="{{ asset('icon/logo192.png') }}"/>
+<meta name="msapplication-TileImage" content="{{ asset('icon/logo192.png') }}"/>
+<meta name="msapplication-TileColor" content="#20c997"/>
+<meta name="theme-color" content="#20c997"/>
+
 
   <title>Aset Tree</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -35,7 +44,7 @@
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- ChartJS -->
-<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+{{-- <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script> --}}
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
