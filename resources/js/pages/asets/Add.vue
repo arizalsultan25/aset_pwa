@@ -34,7 +34,6 @@
               <option value="Furniture">Furniture</option>
               <option value="Elektronik">Elektronik</option>
               <option value="Dokumen">Dokumen</option>
-              <option value="Dll">dan lain lain</option>
             </select>
           </div>
 

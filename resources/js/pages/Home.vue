@@ -4,12 +4,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Dashboard Staf {{ $store.state.data.divisi }}</h1>
+            <h1>Dashboard Administator</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">
-                <router-link to="/dashboard">Home</router-link> /
+                <router-link to="/">Home</router-link> /
               </li>
             </ol>
           </div>

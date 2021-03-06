@@ -7,12 +7,12 @@
       <div class="card-body">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <router-link
+            <!-- <router-link
               :to="{ name: 'property.add' }"
               class="btn bg-teal btn-sm btn-flat"
             >
               <i class="fa fa-plus-circle"></i> Tambah</router-link
-            >
+            > -->
           </div>
           <div class="col-sm-6">
             <div class="pull-right">
@@ -67,8 +67,8 @@
             <template #cell(actions)="row">
               <div class="btn-group" role="group" aria-label="Basic example">
                 <router-link :to="{ name: 'asets.detail', params: {id: row.item.qr} }" type="button" class="btn btn-primary">Detail</router-link>
-                <router-link :to="{ name: 'asets.edit', params: {id: row.item.qr} }" class="btn btn-warning">Edit</router-link>
-                <button type="button" class="btn btn-danger" @click="deleteAset(row.item.id)">Delete</button>
+                <!-- <router-link :to="{ name: 'asets.edit', params: {id: row.item.qr} }" class="btn btn-warning">Edit</router-link>
+                <button type="button" class="btn btn-danger" @click="deleteAset(row.item.id)">Delete</button> -->
               </div>
             </template>
           </b-table>
