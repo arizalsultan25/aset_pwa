@@ -154,6 +154,7 @@ export default {
 
     async submit() {
       try {
+        console.log(this.form)
         let uri = "/api/asets/store";
         let response = await axios.post(uri, this.form);
         if (response.status == 200) {

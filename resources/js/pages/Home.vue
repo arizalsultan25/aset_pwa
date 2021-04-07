@@ -207,7 +207,6 @@
                 <bar-chart
                   v-if="loaded"
                   :chartdata="data_div"
-                  :options="options"
                    height="200"
                 />
               </div>
@@ -235,7 +234,6 @@
                 <pie-chart
                   v-if="loaded"
                   :chartdata="datacollection"
-                  :options="options"
                 />
               </div>
               <!-- /.card-body -->
@@ -265,7 +263,6 @@
                 <bar-chart
                   v-if="load_bar"
                   :chartdata="data_bar"
-                  :options="options"
                 />
               </div>
               <!-- /.card-body -->
@@ -399,6 +396,8 @@ export default {
         prod: "",
         hr: "",
       },
+
+      options : null,
 
       jadwal: [],
 

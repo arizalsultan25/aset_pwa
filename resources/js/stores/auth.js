@@ -37,7 +37,10 @@ const actions = {
                         commit('SET_ROLE', response.data.role, { root: true })
                         commit('SET_DIVISI', response.data.divisi, { root: true })
                     } else {
-                        commit('SET_ERRORS', { invalid: 'Email/Password Salah' }, { root: true })
+                        // commit('SET_ERRORS', { invalid: 'Email/Password Salah' }, { root: true })
+
+                        commit('SET_ERRORS', response.data.status, { root: true })
+
                     }
                     //JANGAN LUPA UNTUK MELAKUKAN RESOLVE AGAR DIANGGAP SELESAI
                     resolve(response.data)
