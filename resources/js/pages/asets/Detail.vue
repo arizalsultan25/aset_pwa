@@ -5,12 +5,21 @@
         <h1 class="card-title">Detail Data Aset {{ data.nama_aset}}</h1>
       </div>
       <div class="card-body">
-          <div class="form-group">
+          <div class="form-group" v-if="data.jenis !== 'Elektronik'">
             <label>ID Aset</label>
             <input
               type="text"
               class="form-control"
               v-model="data.id"
+              disabled
+            />
+          </div>
+          <div class="form-group" v-else>
+            <label>Serial Number</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="data.serial_number"
               disabled
             />
           </div>

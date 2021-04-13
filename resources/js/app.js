@@ -12,8 +12,6 @@ import Toasted from 'vue-toasted';
 import VueSimpleAlert from "vue-simple-alert";
 import VueQrcode from '@chenfengyuan/vue-qrcode';
 import VueQrcodeReader from "vue-qrcode-reader";
-import VueMoment from 'vue-moment'
-import Chart from 'chart.js';
 
 
 // Implementasi library pada Vue Js
@@ -22,12 +20,11 @@ Vue.use(Toasted)
 Vue.use(VueSimpleAlert);
 Vue.component(VueQrcode.name, VueQrcode);
 Vue.use(VueQrcodeReader);
-Vue.use(VueMoment);
 
 // Add Bootstrap
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 
 new Vue({

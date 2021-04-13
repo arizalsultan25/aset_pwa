@@ -26,6 +26,7 @@
     "dependencies": {
         "@chenfengyuan/vue-qrcode": "^1.0.2",
         "bootstrap-vue": "^2.21.2",
+        "cache-polyfill": "^1.0.1",
         "chart.js": "^2.9.4",
         "vue-chartjs": "^3.5.1",
         "vue-moment": "^4.1.0",

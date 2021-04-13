@@ -118,6 +118,7 @@ export default {
         { key: "divisi", label: "Divisi" },
         { key: "status", label: "Status" },
         { key: "qr", label: "Kode QR" },
+        { key: "serial_number", label: "S/N"},
         { key: "actions", label: "Aksi" },
       ],
       search: "",

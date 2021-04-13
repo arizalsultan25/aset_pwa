@@ -16,6 +16,7 @@ class CreateAsetsTable extends Migration
         Schema::create('asets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_aset');
+            $table->string('serial_number', 16)->default(null)->nullable();
             $table->string('jenis');
             $table->string('merk');
             $table->text('deskripsi');

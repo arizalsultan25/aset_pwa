@@ -24,12 +24,21 @@
                 </h1>
               </div>
               <div class="card-body">
-                <div class="form-group">
+                <div class="form-group" v-if="data.jenis !== 'Elektronik'">
                   <label>ID Aset</label>
                   <input
                     type="text"
                     class="form-control"
                     v-model="data.id"
+                    disabled
+                  />
+                </div>
+                <div class="form-group" v-else>
+                  <label>Serial Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="data.serial_number"
                     disabled
                   />
                 </div>
@@ -259,6 +268,7 @@ export default {
         status: "",
         qr: "qr",
         gambar: "",
+        serial_number: "",
         created_at: "",
         updated_at: "",
       },

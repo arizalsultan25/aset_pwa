@@ -178,7 +178,6 @@
                 <pie-chart
                   v-if="loaded"
                   :chartdata="datacollection"
-                  :options="options"
                 />
               </div>
               <!-- /.card-body -->
@@ -208,7 +207,6 @@
                 <bar-chart
                   v-if="load_bar"
                   :chartdata="data_bar"
-                  :options="options"
                 />
               </div>
               <!-- /.card-body -->

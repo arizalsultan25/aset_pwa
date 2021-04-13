@@ -80,6 +80,7 @@ class AsetController extends Controller
             'divisi' => request('divisi'),
             'qr' => $random,
             'gambar' => $random . '.' . $extension,
+            'serial_number' => request('serial_number'),
         ]);
 
         // Return pesan sukses

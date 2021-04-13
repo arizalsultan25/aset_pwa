@@ -37,6 +37,17 @@
             </select>
           </div>
 
+          <div class="form-group" v-if="form.jenis == 'Elektronik'">
+            <label for="serial">Serial Number</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="form.serial_number"
+              placeholder="S/N"
+              maxlength="16"
+            />
+          </div>
+
           <div class="form-group">
             <label for="merk">Merk</label>
             <input
@@ -113,6 +124,7 @@ export default {
     return {
       // form
       form: {
+        serial_number : '',
         nama_aset: "",
         jenis: "Elektronik",
         merk: "",
@@ -160,6 +172,7 @@ export default {
         if (response.status == 200) {
           this.form.nama_aset = "";
           this.form.jenis = "Elektronik";
+          this.serial_number = '';
           this.form.merk = "";
           this.form.deskripsi = "";
           this.form.divisi = "IT Support";

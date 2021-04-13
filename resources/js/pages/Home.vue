@@ -207,7 +207,6 @@
                 <bar-chart
                   v-if="loaded"
                   :chartdata="data_div"
-                   height="200"
                 />
               </div>
               <!-- /.card-body -->

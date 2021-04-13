@@ -30,17 +30,17 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (event) => {
 	deferredPrompt = event;
 });
-document.getElementById('install').addEventListener('click',() => {
-	console.log('Install Aplikasi PWA');
-	if(deferredPrompt) {	
-		deferredPrompt.userChoice.then((result) => {
-			console.log(result.outcome);
-			if(result.outcome === 'dismissed') {
-				console.log('Aplikasi batal di-instal');
-			} else {
-				console.log('Aplikasi sudah di-install di home screen');
-			}
-		});
-		delete deferredPrompt;
-	}
-});
+// document.getElementById('install').addEventListener('click',() => {
+// 	console.log('Install Aplikasi PWA');
+// 	if(deferredPrompt) {	
+// 		deferredPrompt.userChoice.then((result) => {
+// 			console.log(result.outcome);
+// 			if(result.outcome === 'dismissed') {
+// 				console.log('Aplikasi batal di-instal');
+// 			} else {
+// 				console.log('Aplikasi sudah di-install di home screen');
+// 			}
+// 		});
+// 		delete deferredPrompt;
+// 	}
+// });

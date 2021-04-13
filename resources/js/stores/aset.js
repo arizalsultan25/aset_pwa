@@ -13,6 +13,7 @@ const state = () => ({
         divisi: '',
         status: '',
         qr: '',
+        serial_number : '',
         gambar: '',
     },
     page: 1 //UNTUK MENCATAT PAGE PAGINATE YANG SEDANG DIAKSES
@@ -37,6 +38,7 @@ const mutations = {
             divisi: payload.divisi,
             status: payload.status,
             qr: payload.qr,
+            serial_number: payload.serial_number,
             gambar: payload.gambar,
         }
     },
@@ -50,6 +52,7 @@ const mutations = {
             divisi: '',
             status: '',
             qr: '',
+            serial_number: '',
             gambar: '',
         }
     }

@@ -1,3 +1,7 @@
+// importScripts('/cache-polyfill.js');
+
+// import 'cache-polyfill'
+
 var CACHE_NAME = 'a2hc-v1';
 var urlsToCache = [
   './?v1',
@@ -12,16 +16,19 @@ var urlsToCache = [
   '/icon/logo512.png?v1',
 
   // Keperluan load aplikasi
-  'plugins/fontawesome-free/css/all.min.css',
-  'dist/css/adminlte.min.css',
-  'plugins/jquery/jquery.min.js',
-  'plugins/bootstrap/js/bootstrap.bundle.min.js',
-  'plugins/chart.js/Chart.min.js',
-  'dist/js/adminlte.min.js',
-  'dist/js/demo.js',
-  'js/app.js'
+  './plugins/fontawesome-free/css/all.min.css',
+  './dist/css/adminlte.min.css',
+  './plugins/jquery/jquery.min.js',
+  './plugins/bootstrap/js/bootstrap.bundle.min.js',
+  './plugins/chart.js/Chart.min.js',
+  './dist/js/adminlte.min.js',
+  './dist/js/demo.js',
+  './js/app.js',
+  'A2HS.js',
 
 ];
+
+
 self.addEventListener('install', function (event) {
   console.log('installing service worker');
   event.waitUntil(
