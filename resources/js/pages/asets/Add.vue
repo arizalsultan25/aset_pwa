@@ -177,6 +177,7 @@ export default {
           this.form.deskripsi = "";
           this.form.divisi = "IT Support";
           this.form.gambar = null;
+          this.form.serial_number = '';
           (this.nama_file = "Pilih gambar aset"), (this.errors = []);
           this.$toasted.show(response.data.message, {
             type: "success",

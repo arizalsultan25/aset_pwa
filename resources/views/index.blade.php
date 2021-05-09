@@ -20,9 +20,6 @@
 
     <link rel="canonical" href="https://localhost:8080/" />
 
-    {{-- Preload --}}
-    
-    {{-- <link rel="preload" href="{{ asset('js/app.js') }}" as="script"> --}}
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 
