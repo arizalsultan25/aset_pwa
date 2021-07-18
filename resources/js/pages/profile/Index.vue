@@ -1,566 +1,252 @@
 <template>
-  <div class="content-wrapper">
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Profile Pengguna</h1>
-          </div>
-          <div class="col-sm-6">
-            <breadcrumb></breadcrumb>
-          </div>
+  <div class="main-panel">
+    <div class="content">
+      <div class="page-inner">
+        <div class="col-md-12">
+          <h4 class="page-title">Profile Pengguna</h4>
         </div>
-      </div>
-    </section>
-
-    <section class="content">
-      <div class="container-fluid">
         <div class="row">
-          <div class="col-md-4">
-            <!-- Profile Image -->
-            <div class="card card-primary card-outline">
-              <div class="card-body box-profile">
-                <div class="text-center">
-                  <img
-                    class="profile-user-img img-fluid img-circle"
-                    :src="'/dist/img/user2-160x160.jpg'"
-                    alt="User profile picture"
-                  />
+          <div class="col-md-12 col-sm-12 col-12 col-lg-4">
+            <div class="card card-profile">
+              <div
+                class="card-header"
+                style="background-image: url('./img/blogpost.jpg')"
+              >
+                <div class="profile-picture">
+                  <div class="avatar avatar-xl">
+                    <img
+                      :src="'/img/profile.png'"
+                      alt="..."
+                      class="avatar-img rounded-circle"
+                    />
+                  </div>
                 </div>
-
-                <h3 class="profile-username text-center">
-                  {{ $store.state.data.name }}
-                </h3>
-
-                <p class="text-muted text-center">Software Engineer</p>
-
-                <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
-                    <b>Authority</b>
-                    <a class="float-right">
-                      <template v-if="$store.state.data.role == 0">
-                        <p class="badge bg-teal text-center">Administrator</p>
-                      </template>
-                      <template v-else>
-                        <p class="badge bg-primary text-center">
-                          Staff Divisi {{ $store.state.data.divisi }}
-                        </p>
-                      </template>
-                    </a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Followers</b> <a class="float-right">1,322</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Following</b> <a class="float-right">543</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Friends</b> <a class="float-right">13,287</a>
-                  </li>
-                </ul>
-
-                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
               </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- About Me Box -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">About Me</h3>
-              </div>
-              <!-- /.card-header -->
               <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                <div class="user-profile text-center">
+                  <div class="name">{{ $store.state.data.name }}</div>
+                  <div class="job" v-if="$store.state.data.role == 0">
+                    Administrator
+                  </div>
+                  <div class="job" v-else>
+                    Staff Divisi {{ $store.state.data.divisi }}
+                  </div>
 
-                <p class="text-muted">
-                  B.S. in Informatic Engineering from Batam State Polytechnic
-                </p>
+                  <div class="desc" v-if="$store.state.data.role == 0">
+                    Super User
+                  </div>
+                  <div class="desc" v-else>
+                    Anggota dari divisi {{ $store.state.data.divisi }} 
+                  </div>
 
-                <hr />
-
-                <strong
-                  ><i class="fas fa-map-marker-alt mr-1"></i> Location</strong
-                >
-
-                <p class="text-muted">Batam, Kepulauan Riau, Indonesia (ID)</p>
-
-                <hr />
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                <p class="text-muted">
-                  <span class="tag tag-danger">UI Design</span>
-                  <span class="tag tag-success">Coding</span>
-                  <span class="tag tag-info">Javascript</span>
-                  <span class="tag tag-warning">PHP</span>
-                  <span class="tag tag-primary">Node.js</span>
-                </p>
-
-                <hr />
-
-                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                  fermentum enim neque.
-                </p>
+                  <div class="social-media">
+                    <a
+                      class="btn btn-info btn-twitter btn-sm btn-link"
+                      href="#"
+                    >
+                      <span class="btn-label just-icon"
+                        ><i class="flaticon-twitter"></i>
+                      </span>
+                    </a>
+                    <a
+                      class="btn btn-danger btn-sm btn-link"
+                      rel="publisher"
+                      href="#"
+                    >
+                      <span class="btn-label just-icon"
+                        ><i class="flaticon-google-plus"></i>
+                      </span>
+                    </a>
+                    <a
+                      class="btn btn-primary btn-sm btn-link"
+                      rel="publisher"
+                      href="#"
+                    >
+                      <span class="btn-label just-icon"
+                        ><i class="flaticon-facebook"></i>
+                      </span>
+                    </a>
+                    <a
+                      class="btn btn-danger btn-sm btn-link"
+                      rel="publisher"
+                      href="#"
+                    >
+                      <span class="btn-label just-icon"
+                        ><i class="flaticon-dribbble"></i>
+                      </span>
+                    </a>
+                  </div>
+                  <!-- <div class="view-profile">
+                                        <a href="#" class="btn btn-secondary btn-block">View Full Profile</a>
+                                    </div> -->
+                </div>
               </div>
-              <!-- /.card-body -->
+              <div class="card-footer">
+                <div class="row user-stats text-center">
+                  <div class="col">
+                    <div class="number">125</div>
+                    <div class="title">Post</div>
+                  </div>
+                  <div class="col">
+                    <div class="number">25K</div>
+                    <div class="title">Followers</div>
+                  </div>
+                  <div class="col">
+                    <div class="number">134</div>
+                    <div class="title">Following</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- /.card -->
           </div>
           <!-- /.col -->
-          <div class="col-md-8">
+
+          <div class="col-md-12 col-sm-12 col-12 col-lg-8">
             <div class="card">
-              <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                  <li class="nav-item">
-                    <a
-                      class="nav-link active"
-                      href="#activity"
-                      data-toggle="tab"
-                      >Activity</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#timeline" data-toggle="tab"
-                      >Timeline</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#settings" data-toggle="tab"
-                      >Settings</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a
-                      class="nav-link"
-                      href="#change-password"
-                      data-toggle="tab"
-                      >Ubah Password</a
-                    >
-                  </li>
-                </ul>
+              <div class="card-header">
+                <h4 class="card-title">Profile</h4>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active" id="activity">
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <img
-                          class="img-circle img-bordered-sm"
-                          :src="'/dist/img/user1-128x128.jpg'"
-                          alt="user image"
-                        />
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="float-right btn-tool"
-                            ><i class="fas fa-times"></i
-                          ></a>
-                        </span>
-                        <span class="description"
-                          >Shared publicly - 7:30 PM today</span
-                        >
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for
-                        designers, typographers and the like. Some people hate
-                        it and argue for its demise, but others ignore the hate
-                        as they create awesome tools to help create filler text
-                        for everyone from bacon lovers to Charlie Sheen fans.
-                      </p>
+									<ul class="nav nav-pills nav-secondary  nav-pills-no-bd nav-pills-icons justify-content-center" id="pills-tab-with-icon" role="tablist">
+										<li class="nav-item submenu">
+											<a class="nav-link active show" id="pills-home-tab-icon" data-toggle="pill" href="#pills-home-icon" role="tab" aria-controls="pills-home-icon" aria-selected="true">
+												<i class="flaticon-home"></i>
+												Home
+											</a>
+										</li>
+										<li class="nav-item submenu">
+											<a class="nav-link" id="pills-profile-tab-icon" data-toggle="pill" href="#pills-profile-icon" role="tab" aria-controls="pills-profile-icon" aria-selected="false">
+												<i class="flaticon-user-1"></i>
+												Profile
+											</a>
+										</li>
+										<li class="nav-item submenu">
+											<a class="nav-link" id="pills-change-password-tab-icon" data-toggle="pill" href="#pills-change-password-icon" role="tab" aria-controls="pills-change-password-icon" aria-selected="false">
+												<i class="flaticon-user-5"></i>
+												Ubah Password
+											</a>
+										</li>
+									</ul>
+									<div class="tab-content mt-2 mb-3" id="pills-with-icon-tabContent">
+										<div class="tab-pane fade active show" id="pills-home-icon" role="tabpanel" aria-labelledby="pills-home-tab-icon">
+											<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"
-                          ><i class="fas fa-share mr-1"></i> Share</a
+											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+										</div>
+										<div class="tab-pane fade" id="pills-profile-icon" role="tabpanel" aria-labelledby="pills-profile-tab-icon">
+											<form
+                          class="form-horizontal"
+                          @submit.prevent="editProfile"
                         >
-                        <a href="#" class="link-black text-sm"
-                          ><i class="far fa-thumbs-up mr-1"></i> Like</a
-                        >
-                        <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                      </p>
-
-                      <input
-                        class="form-control form-control-sm"
-                        type="text"
-                        placeholder="Type a comment"
-                      />
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post clearfix">
-                      <div class="user-block">
-                        <img
-                          class="img-circle img-bordered-sm"
-                          :src="'/dist/img/user7-128x128.jpg'"
-                          alt="User Image"
-                        />
-                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                          <a href="#" class="float-right btn-tool"
-                            ><i class="fas fa-times"></i
-                          ></a>
-                        </span>
-                        <span class="description"
-                          >Sent you a message - 3 days ago</span
-                        >
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for
-                        designers, typographers and the like. Some people hate
-                        it and argue for its demise, but others ignore the hate
-                        as they create awesome tools to help create filler text
-                        for everyone from bacon lovers to Charlie Sheen fans.
-                      </p>
-
-                      <form class="form-horizontal">
-                        <div class="input-group input-group-sm mb-0">
-                          <input
-                            class="form-control form-control-sm"
-                            placeholder="Response"
-                          />
-                          <div class="input-group-append">
-                            <button type="submit" class="btn btn-danger">
-                              Send
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <img
-                          class="img-circle img-bordered-sm"
-                          :src="'/dist/img/user6-128x128.jpg'"
-                          alt="User Image"
-                        />
-                        <span class="username">
-                          <a href="#">Adam Jones</a>
-                          <a href="#" class="float-right btn-tool"
-                            ><i class="fas fa-times"></i
-                          ></a>
-                        </span>
-                        <span class="description"
-                          >Posted 5 photos - 5 days ago</span
-                        >
-                      </div>
-                      <!-- /.user-block -->
-                      <div class="row mb-3">
-                        <div class="col-sm-6">
-                          <img
-                            class="img-fluid"
-                            :src="'/dist/img/photo1.png'"
-                            alt="Photo"
-                          />
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-6">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <img
-                                class="img-fluid mb-3"
-                                :src="'/dist/img/photo2.png'"
-                                alt="Photo"
-                              />
-                              <img
-                                class="img-fluid"
-                                :src="'/dist/img/photo3.jpg'"
-                                alt="Photo"
+                          <div class="form-group row">
+                            <label
+                              for="inputName"
+                              class="col-sm-2 col-form-label"
+                              >ID</label
+                            >
+                            <div class="col-sm-10">
+                              <input
+                                type="text"
+                                class="form-control"
+                                :value="data.id"
+                                disabled
                               />
                             </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                              <img
-                                class="img-fluid mb-3"
-                                :src="'/dist/img/photo4.jpg'"
-                                alt="Photo"
-                              />
-                              <img
-                                class="img-fluid"
-                                :src="'/dist/img/photo1.png'"
-                                alt="Photo"
+                          </div>
+                          <div class="form-group row">
+                            <label
+                              for="inputEmail"
+                              class="col-sm-2 col-form-label"
+                              >Email</label
+                            >
+                            <div class="col-sm-10">
+                              <input
+                                type="email"
+                                class="form-control"
+                                v-model="data.email"
                               />
                             </div>
-                            <!-- /.col -->
                           </div>
-                          <!-- /.row -->
-                        </div>
-                        <!-- /.col -->
-                      </div>
-                      <!-- /.row -->
-
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"
-                          ><i class="fas fa-share mr-1"></i> Share</a
-                        >
-                        <a href="#" class="link-black text-sm"
-                          ><i class="far fa-thumbs-up mr-1"></i> Like</a
-                        >
-                        <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                      </p>
-
-                      <input
-                        class="form-control form-control-sm"
-                        type="text"
-                        placeholder="Type a comment"
-                      />
-                    </div>
-                    <!-- /.post -->
-                  </div>
-                  <!-- /.tab-pane -->
-                  <div class="tab-pane" id="timeline">
-                    <!-- The timeline -->
-                    <div class="timeline timeline-inverse">
-                      <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-danger"> 10 Feb. 2014 </span>
-                      </div>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-envelope bg-primary"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"
-                            ><i class="far fa-clock"></i> 12:05</span
-                          >
-
-                          <h3 class="timeline-header">
-                            <a href="#">Support Team</a> sent you an email
-                          </h3>
-
-                          <div class="timeline-body">
-                            Etsy doostang zoodles disqus groupon greplin oooj
-                            voxy zoodles, weebly ning heekya handango imeem
-                            plugg dopplr jibjab, movity jajah plickers sifteo
-                            edmodo ifttt zimbra. Babblely odeo kaboodle quora
-                            plaxo ideeli hulu weebly balihoo...
-                          </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-primary btn-sm"
-                              >Read more</a
+                          <div class="form-group row">
+                            <label
+                              for="inputName2"
+                              class="col-sm-2 col-form-label"
+                              >Name</label
                             >
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            <div class="col-sm-10">
+                              <input
+                                type="text"
+                                class="form-control"
+                                v-model="data.nama"
+                              />
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-user bg-info"></i>
 
-                        <div class="timeline-item">
-                          <span class="time"
-                            ><i class="far fa-clock"></i> 5 mins ago</span
-                          >
-
-                          <h3 class="timeline-header border-0">
-                            <a href="#">Sarah Young</a> accepted your friend
-                            request
-                          </h3>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-comments bg-warning"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"
-                            ><i class="far fa-clock"></i> 27 mins ago</span
-                          >
-
-                          <h3 class="timeline-header">
-                            <a href="#">Jay White</a> commented on your post
-                          </h3>
-
-                          <div class="timeline-body">
-                            Take me to your leader! Switzerland is small and
-                            neutral! We are more like Germany, ambitious and
-                            misunderstood!
+                          <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                              <button type="submit" class="btn btn-danger">
+                                Submit
+                              </button>
+                            </div>
                           </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-warning btn-flat btn-sm"
-                              >View comment</a
-                            >
+                        </form>
+										</div>
+										<div class="tab-pane fade" id="pills-change-password-icon" role="tabpanel" aria-labelledby="pills-change-password-tab-icon">
+											 <form
+                          class="form-horizontal"
+                          @submit.prevent="changePassword"
+                        >
+                          <div class="form-group">
+                            <label for="password">Password Lama</label>
+                            <input
+                              type="password"
+                              maxlength="12"
+                              placeholder="Password lama"
+                              class="form-control"
+                              v-model="form.pass_lama"
+                            />
                           </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-success"> 3 Jan. 2014 </span>
-                      </div>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-camera bg-purple"></i>
 
-                        <div class="timeline-item">
-                          <span class="time"
-                            ><i class="far fa-clock"></i> 2 days ago</span
-                          >
-
-                          <h3 class="timeline-header">
-                            <a href="#">Mina Lee</a> uploaded new photos
-                          </h3>
-
-                          <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="..." />
-                            <img src="http://placehold.it/150x100" alt="..." />
-                            <img src="http://placehold.it/150x100" alt="..." />
-                            <img src="http://placehold.it/150x100" alt="..." />
+                          <div class="form-group">
+                            <label for="password">Password Baru</label>
+                            <input
+                              type="password"
+                              maxlength="12"
+                              placeholder="Password baru"
+                              class="form-control"
+                              v-model="form.pass_baru"
+                            />
                           </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <div>
-                        <i class="far fa-clock bg-gray"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.tab-pane -->
 
-                  <div class="tab-pane" id="settings">
-                    <form class="form-horizontal" @submit.prevent="editProfile">
-                      <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label"
-                          >ID</label
-                        >
-                        <div class="col-sm-10">
-                          <input
-                            type="text"
-                            class="form-control"
-                            :value="data.id"
-                            disabled
-                          />
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputEmail" class="col-sm-2 col-form-label"
-                          >Email</label
-                        >
-                        <div class="col-sm-10">
-                          <input
-                            type="email"
-                            class="form-control"
-                            v-model="data.email"
-                          />
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label"
-                          >Name</label
-                        >
-                        <div class="col-sm-10">
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="data.nama"
-                          />
-                        </div>
-                      </div>
+                          <div class="form-group">
+                            <label for="password">Konfirmasi Password baru</label>
+                            <input
+                              type="password"
+                              maxlength="12"
+                              placeholder="Konfirmasi password baru"
+                              class="form-control"
+                              v-model="form.pass_confirm"
+                            />
+                          </div>
 
-                      <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">
-                            Submit
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- /.tab-pane -->
-
-                  <div class="tab-pane" id="change-password">
-                    <form
-                      class="form-horizontal"
-                      @submit.prevent="changePassword"
-                    >
-                      <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label"
-                          >Password Lama</label
-                        >
-                        <div class="col-sm-10">
-                          <input
-                            type="password"
-                            maxlength="12"
-                            placeholder="Password lama"
-                            class="form-control"
-                            v-model="form.pass_lama"
-                          />
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label"
-                          >Password Baru</label
-                        >
-                        <div class="col-sm-10">
-                          <input
-                            type="password"
-                            maxlength="12"
-                            placeholder="Password baru"
-                            v-model="form.pass_baru"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label"
-                          >Konfirmasi Password Baru</label
-                        >
-                        <div class="col-sm-10">
-                          <input
-                            type="password"
-                            maxlength="12"
-                            v-model="form.pass_confirm"
-                            placeholder="Konfirmasi Password baru"
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">
-                            Submit
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- /.tab-pane -->
-                </div>
-                <!-- /.tab-content -->
+                          <div class="form-group row">
+                            <div class="ml-3">
+                              <button type="submit" class="btn btn-danger">
+                                Submit
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+										</div>
+									</div>
               </div>
-              <!-- /.card-body -->
             </div>
             <!-- /.nav-tabs-custom -->
           </div>
           <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
-    </section>
+    </div>
   </div>
 </template>
 
@@ -592,6 +278,10 @@ export default {
       },
     };
   },
+  mounted(){
+    this.getUserData()
+  },
+
   methods: {
     async getUserData() {
       let token = this.$store.state.token;
@@ -608,18 +298,18 @@ export default {
       // this.$store.state.data.name = localStorage.getItem("nama");
       try {
         // console.log(this.data);
-        let token = localStorage.getItem('token')
-        let uri = "/api/users/update/"+token;
-        let response = await axios.post(uri, this.data)
-          if (response.status == 200) {
-            this.$toasted.show(
-              "Data Pengguna telah diperbarui, perubahan akan diterapkan setelah logout",
-              {
-                type: "success",
-                duration: 3000,
-              }
-            );
-          }
+        let token = localStorage.getItem("token");
+        let uri = "/api/users/update/" + token;
+        let response = await axios.post(uri, this.data);
+        if (response.status == 200) {
+          this.$toasted.show(
+            "Data Pengguna telah diperbarui, perubahan akan diterapkan setelah logout",
+            {
+              type: "success",
+              duration: 3000,
+            }
+          );
+        }
       } catch (e) {
         this.errors = e.response.data.errors;
 
@@ -634,29 +324,27 @@ export default {
       try {
         // console.log(this.data);
 
-        if(this.form.pass_baru !== this.form.pass_confirm){
+        if (this.form.pass_baru !== this.form.pass_confirm) {
           this.$toasted.show("password konfirmasi tidak cocok", {
-          type: "error",
-          duration: 3000,
-        });
-        return 0
+            type: "error",
+            duration: 3000,
+          });
+          return 0;
         }
 
-        let token = localStorage.getItem('token')
-        let uri = "/api/users/change-password/"+token;
-        let response = await axios.post(uri, this.form)
-          if (response.status == 200) {
-            this.$toasted.show(
-              response.data.message,
-              {
-                type: response.data.status,
-                duration: 3000,
-              });
+        let token = localStorage.getItem("token");
+        let uri = "/api/users/change-password/" + token;
+        let response = await axios.post(uri, this.form);
+        if (response.status == 200) {
+          this.$toasted.show(response.data.message, {
+            type: response.data.status,
+            duration: 3000,
+          });
 
-              this.form.pass_baru = ''
-              this.form.pass_lama = ''
-              this.form.pass_confirm = ''
-          }
+          this.form.pass_baru = "";
+          this.form.pass_lama = "";
+          this.form.pass_confirm = "";
+        }
       } catch (e) {
         this.errors = e.response.data.errors;
 
@@ -665,8 +353,7 @@ export default {
           duration: 3000,
         });
       }
-    }
-     
+    },
   },
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
     <div class="col-md-12">
     <div class="card">
-      <div class="card-header bg-info">
-        <h1 class="card-title">Detail Data Aset {{ data.nama_aset}}</h1>
+      <div class="card-header">
+        <h1 class="card-title">Detail Data Aset <strong class="text-success">{{ data.nama_aset}}</strong></h1>
       </div>
       <div class="card-body">
           <div class="form-group" v-if="data.jenis !== 'Elektronik'">

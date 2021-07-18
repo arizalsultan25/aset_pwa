@@ -47,7 +47,7 @@
           </div>
 
           <div class="form-group">
-            <button class="btn bg-teal btn-sm btn-flat" type="submit">
+            <button class="btn btn-success" type="submit">
               <i class="fa fa-save"></i> Add New
             </button>
           </div>

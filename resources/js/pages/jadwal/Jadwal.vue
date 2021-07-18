@@ -1,7 +1,6 @@
 <template>
-  <div class="col-md-12">
-    <div class="row">
-    <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header bg-teal">
           <h1 class="card-title">Kelola Data Jadwal</h1>
@@ -11,7 +10,7 @@
             <div class="col-sm-6">
               <router-link
                 :to="{ name: 'jadwal.add' }"
-                class="btn bg-teal btn-sm btn-flat"
+                class="btn btn-success"
               >
                 <i class="fa fa-plus-circle"></i> Tambah</router-link
               >
@@ -106,9 +105,9 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="card">
-        <div class="card-header bg-secondary">
+        <div class="card-header">
           <h1 class="card-title">Kelola Data Jadwal Lampau</h1>
         </div>
         <div class="card-body">
@@ -161,7 +160,10 @@
 
               <template #cell(actions)="row">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <router-link :to="{ name: 'scan.result', params: {id: row.item.id} }" class="btn btn-info">
+                  <router-link
+                    :to="{ name: 'scan.result', params: { id: row.item.id } }"
+                    class="btn btn-info"
+                  >
                     Hasil Pemindaian
                   </router-link>
                   <button
@@ -198,8 +200,7 @@
         </div>
       </div>
     </div>
-    </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -217,12 +218,27 @@ export default {
       //FIELD UNTUK B-TABLE, PASTIKAN KEY NYA SESUAI DENGAN FIELD DATABASE
       //AGAR OTOMATIS DI-RENDER
       fields: [
-        { key: "judul", label: "Judul Pemindaian" },
-        { key: "divisi", label: "Divisi" },
-        { key: "tanggal", label: "Tanggal" },
+        {
+          key: "judul",
+          label: "Judul Pemindaian",
+        },
+        {
+          key: "divisi",
+          label: "Divisi",
+        },
+        {
+          key: "tanggal",
+          label: "Tanggal",
+        },
         // { key: "status", label: "Status" },
-        { key: "created_at", label: "Dibuat pada" },
-        { key: "actions", label: "Aksi" },
+        {
+          key: "created_at",
+          label: "Dibuat pada",
+        },
+        {
+          key: "actions",
+          label: "Aksi",
+        },
       ],
       search: "",
       search_past: "",

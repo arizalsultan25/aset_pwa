@@ -1,8 +1,8 @@
 <template>
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header bg-warning">
-        <h1 class="card-title">Ubah Data Aset</h1>
+      <div class="card-header">
+        <h1 class="card-title">Ubah Data Aset <strong class="text-warning">{{ form.nama_aset }}</strong></h1>
       </div>
       <div class="card-body">
         <form
@@ -94,7 +94,7 @@
           </div>
 
           <div class="form-group">
-            <button class="btn bg-teal btn-sm btn-flat" type="submit">
+            <button class="btn btn-success" type="submit">
               <i class="fa fa-save"></i> Update
             </button>
           </div>

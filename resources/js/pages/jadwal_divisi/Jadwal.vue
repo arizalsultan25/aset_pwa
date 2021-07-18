@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header bg-warning">
+      <div class="card-header">
         <h1 class="card-title">Jadwal Pemindaian Aset Hari ini</h1>
       </div>
       <div class="card-body">
@@ -83,7 +83,7 @@
     </div>
 
     <div class="card">
-      <div class="card-header bg-info">
+      <div class="card-header">
         <h1 class="card-title">Jadwal Pemindaian yang akan Datang</h1>
       </div>
       <div class="card-body">
@@ -159,7 +159,7 @@
     </div>
 
     <div class="card">
-      <div class="card-header bg-secondary">
+      <div class="card-header">
         <h1 class="card-title">Jadwal Pemindaian Lampau</h1>
       </div>
       <div class="card-body">

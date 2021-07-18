@@ -9,7 +9,7 @@
           <div class="col-sm-6">
             <router-link
               :to="{ name: 'users.add' }"
-              class="btn bg-teal btn-sm btn-flat"
+              class="btn btn-success"
             >
               <i class="fa fa-plus-circle"></i> Tambah</router-link
             >

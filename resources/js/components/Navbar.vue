@@ -1,212 +1,264 @@
 <template>
-  <div>
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-dark navbar-teal">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"
-            ><i class="fas fa-bars"></i
-          ></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <router-link to="/" class="nav-link">Home</router-link>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="javascript:void(0)" @click="logout" class="nav-link"
-            >Logout</a
-          >
-        </li>
-      </ul>
-    </nav>
+    <div>
+        <!-- Navbar -->
+        <div class="main-header">
+            <!-- Logo Header -->
+            <div class="logo-header" style="background-color: #20C997">
 
-    <!-- Sidebar -->
-    <aside
-      class="main-sidebar sidebar-dark-primary elevation-4 sidebar-dark-olive"
-    >
-      <!-- Brand Logo -->
-      <router-link :to="{ name: 'home' }" class="brand-link"  v-if="$store.state.data.role == 0">
-        <img
-          :src="'/icon/Logo.png'"
-          alt="Logo Aset Tree"
-          class="brand-image img-circle elevation-3"
-          style="opacity: 0.8"
-        />
-        <span class="brand-text font-weight-light">Aset Tree</span>
-      </router-link>
+                <router-link :to="{ name: 'home' }" class="logo" v-if="$store.state.data.role == 0">
+                    <img :src="'/icon/logo-nav.png'" alt="navbar brand" class="navbar-brand">
+                </router-link>
+                <router-link :to="{ name: 'home.staf' }" class="logo" v-if="$store.state.data.role == 1">
+                    <img :src="'/icon/logo-nav.png'" alt="navbar brand" class="navbar-brand">
+                </router-link>
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <!-- <i class="icon-menu"></i> -->
+                        <i class="fa fa-bars text-white" aria-hidden="true"></i>
+                    </span>
+                </button>
+                <button class="topbar-toggler more">
+                    <!-- <i class="icon-options-vertical"></i> -->
+                    <i class="fa fa-caret-down text-white" aria-hidden="true"></i>
+                </button>
+                <div class="nav-toggle">
+                    <button class="btn btn-toggle toggle-sidebar">
+                        <!-- <i class="icon-menu"></i> -->
+                    </button>
+                </div>
+            </div>
+            <!-- End Logo Header -->
 
-      <router-link :to="{ name: 'home.staf' }" class="brand-link"  v-if="$store.state.data.role == 1">
-        <img
-          :src="'/icon/Logo.png'"
-          alt="Logo Aset Tree"
-          class="brand-image img-circle elevation-3"
-          style="opacity: 0.8"
-        />
-        <span class="brand-text font-weight-light">Aset Tree</span>
-      </router-link>
-
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar user (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img
-              :src="'/dist/img/user2-160x160.jpg'"
-              class="img-circle elevation-2"
-              alt="User Image"
-            />
-          </div>
-          <div class="info">
-            <router-link :to="{ name: 'profile' }" class="d-block">{{
-              $store.state.data.name
-            }}</router-link>
-          </div>
+            <!-- Navbar Header -->
+            <nav class="navbar navbar-header navbar-expand-lg bg-success-gradient">
+                <div class="container-fluid">
+                    <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                        <li class="nav-item dropdown hidden-caret">
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
+                                aria-expanded="false">
+                                <div class="avatar-sm">
+                                    <img :src="'/img/profile.png'" alt="..." class="avatar-img rounded-circle">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user animated fadeIn">
+                                <div class="dropdown-user-scroll scrollbar-outer">
+                                    <li>
+                                        <div class="user-box">
+                                            <div class="avatar-lg"><img :src="'/img/profile.png'" alt="image profile"
+                                                    class="avatar-img rounded">
+                                            </div>
+                                            <div class="u-text">
+                                                <h4>{{  $store.state.data.name }}</h4>
+                                                <p class="text-muted">{{  $store.state.data.email }}</p>
+                                                <router-link :to="{ name: 'profile' }"
+                                                    class="btn btn-xs btn-secondary btn-sm">View Profile</router-link>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- End Navbar -->
         </div>
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-            <li class="nav-item" v-if="$store.state.data.role == 0">
-              <router-link :to="{ name: 'home' }" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt text-teal"></i>
-                <p>Dashboard</p>
-              </router-link>
-            </li>
+        <!-- Sidebar -->
+        <div class="sidebar sidebar-style-2">
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <div class="user">
+                        <div class="avatar-sm float-left mr-2">
+                            <img :src="'/img/profile.png'" alt="..." class="avatar-img rounded-circle">
+                        </div>
+                        <div class="info">
+                            <a data-toggle="collapse" aria-expanded="true">
+                                <span>
+                                    {{ $store.state.data.name }}
+                                    <span class="user-level" v-if="$store.state.data.role == 0">Administrator</span>
+                                    <span class="user-level" v-else>Staff Divisi {{ $store.state.data.divisi }}</span>
+                                </span>
+                            </a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <ul class="nav nav-primary">
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h4 class="text-section">Halaman</h4>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 1">
-              <router-link :to="{ name: 'home.staf' }" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt text-teal"></i>
-                <p>Dashboard</p>
-              </router-link>
-            </li>
+                        <!-- Menu Untuk Hak akses Admin -->
+                        <li class="nav-item" v-if="$store.state.data.role == 0">
+                            <router-link :to="{ name : 'home' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 0">
-              <router-link :to="{ name: 'asets.data' }" class="nav-link">
-                <i class="nav-icon fas fa-boxes text-teal"></i>
-                <p>
-                  Data Aset
-                  <span class="right badge badge-danger">New</span>
-                </p>
-              </router-link>
-            </li>
+                        <li class="nav-item" v-if="$store.state.data.role == 0">
+                            <router-link :to="{ name : 'asets.data' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fas fa-boxes"></i>
+                                <p>Data Aset</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 0">
-              <router-link :to="{ name: 'jadwal.data' }" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt text-teal"></i>
-                <p>Jadwal Pemindaian Aset</p>
-              </router-link>
-            </li>
+                        <li class="nav-item" v-if="$store.state.data.role == 0">
+                            <router-link :to="{ name : 'jadwal.data' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                <p>Jadwal Pemindaian Aset</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 1">
-              <router-link :to="{ name: 'property.data' }" class="nav-link">
-                <i class="nav-icon fas fa-boxes text-teal"></i>
-                <p>Aset</p>
-              </router-link>
-            </li>
+                        <li class="nav-item" v-if="$store.state.data.role == 0">
+                            <router-link :to="{ name : 'pelaporan' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fa fa-archive" aria-hidden="true"></i>
+                                <p>Pelaporan Aset</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 1">
-              <router-link :to="{ name: 'jadwal-scan.data' }" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt text-teal"></i>
-                <p>Lihat Jadwal Scan Aset</p>
-              </router-link>
-            </li>
+                        <li class="nav-item" v-if="$store.state.data.role == 0">
+                            <router-link :to="{ name : 'users.data' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                <p>Pengguna</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 1">
-              <router-link :to="{ name: 'scan' }" class="nav-link">
-                <i class="nav-icon fas fa-qrcode text-teal"></i>
-                <p>Scan Aset</p>
-              </router-link>
-            </li>
+                        <!-- Menu Untuk Hak Akses Staff Divisi -->
+                        <li class="nav-item" v-if="$store.state.data.role == 1">
+                            <router-link :to="{ name : 'home.staf' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 0">
-              <router-link :to="{ name: 'pelaporan' }" class="nav-link">
-                <i class="nav-icon fas fa-archive text-teal"></i>
-                <p>Pelaporan Aset</p>
-              </router-link>
-            </li>
+                        <li class="nav-item" v-if="$store.state.data.role == 1">
+                            <router-link :to="{ name : 'property.data' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fas fa-boxes"></i>
+                                <p>Aset</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 1">
-              <router-link :to="{ name: 'pelaporan.scan' }" class="nav-link">
-                <i class="nav-icon fas fa-qrcode text-teal"></i>
-                <p>Lapor Kerusakan Aset</p>
-              </router-link>
-            </li>
+                        <li class="nav-item" v-if="$store.state.data.role == 1">
+                            <router-link :to="{ name : 'jadwal-scan.data' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fas fa-calendar"></i>
+                                <p>Lihat Jadwal Scan Aset</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 1">
-              <router-link :to="{ name: 'pelaporan.divisi' }" class="nav-link">
-                <i class="nav-icon fas fa-scroll text-teal"></i>
-                <p>Laporan Kerusakan Aset</p>
-              </router-link>
-            </li>
+                        <li class="nav-item" v-if="$store.state.data.role == 1">
+                            <router-link :to="{ name : 'scan' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fa fa-qrcode" aria-hidden="true"></i>
+                                <p>Scan Aset</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-item" v-if="$store.state.data.role == 0">
-              <router-link :to="{ name: 'users.data' }" class="nav-link">
-                <i class="nav-icon fas fa-users text-teal"></i>
-                <p>User</p>
-              </router-link>
-            </li>
+                        <li class="nav-item" v-if="$store.state.data.role == 1">
+                            <router-link :to="{ name : 'pelaporan.scan' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fa fa-qrcode" aria-hidden="true"></i>
+                                <p>Lapor Kerusakan Aset</p>
+                            </router-link>
+                        </li>
 
-            <li class="nav-header">ACCOUNT</li>
-            <li class="nav-item">
-              <router-link :to="{ name: 'profile' }" class="nav-link">
-                <i class="nav-icon fas fa-user text-teal"></i>
-                <p>Profil</p>
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <a href="javascript:void(0)" @click="logout" class="nav-link">
-                <i class="nav-icon fas fa-sign-out-alt text-teal"></i>
-                <p>Logout</p>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
-    </aside>
-  </div>
+                        <li class="nav-item" v-if="$store.state.data.role == 1">
+                            <router-link :to="{ name : 'pelaporan.divisi' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fas fa-sticky-note "></i>
+                                <p>Laporan Kerusakan Aset</p>
+                            </router-link>
+                        </li>
+
+                        <!-- Menu untuk semua hak akses -->
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h4 class="text-section">Akun</h4>
+                        </li>
+
+                        <li class="nav-item">
+                            <router-link :to="{ name : 'profile' }" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                <p>Profile</p>
+                            </router-link>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" @click="logout" data-toggle="collapse" class="collapsed"
+                                aria-expanded="false">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <p>Log Out</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
+    </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+    import {
+        mapState,
+        mapActions
+    } from "vuex";
 
-export default {
-  methods: {
-    logout() {
-      return new Promise((resolve, reject) => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("divisi");
-        localStorage.removeItem("name");
-        localStorage.removeItem("email");
-        localStorage.removeItem("role");
-        resolve();
-      }).then(() => {
-        this.$store.state.token = localStorage.getItem("token");
-        this.$store.state.data.name = localStorage.getItem("name");
-        this.$store.state.data.divisi = localStorage.getItem("divisi");
-        this.$store.state.data.email = localStorage.getItem("email");
-        this.$store.state.data.role = localStorage.getItem("role");
+    export default {
+        methods: {
+            logout() {
+                return new Promise((resolve, reject) => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("divisi");
+                    localStorage.removeItem("name");
+                    localStorage.removeItem("email");
+                    localStorage.removeItem("role");
+                    resolve();
+                }).then(() => {
+                    this.$store.state.token = localStorage.getItem("token");
+                    this.$store.state.data.name = localStorage.getItem("name");
+                    this.$store.state.data.divisi = localStorage.getItem("divisi");
+                    this.$store.state.data.email = localStorage.getItem("email");
+                    this.$store.state.data.role = localStorage.getItem("role");
 
-        this.$router.push("/login");
-      });
-    },
-  },
-  computed: {
-    ...mapState("user", {
-      authenticated: (state) => state.authenticated,
-    }),
-  },
+                    this.$router.push("/login");
+                });
+            },
+        },
+        computed: {
+            ...mapState("user", {
+                authenticated: (state) => state.authenticated,
+            }),
+        },
 
-  data() {
-    return {
-      nama: this.$store.state.data.name,
-      role: "",
-      email: "",
-      divisi: "",
+        data() {
+            return {
+                nama: this.$store.state.data.name,
+                role: "",
+                email: "",
+                divisi: "",
+            };
+        },
     };
-  },
-};
+
 </script>

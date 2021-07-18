@@ -1,25 +1,13 @@
 <template>
-    <div class="content-wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Data Aset</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <breadcrumb></breadcrumb>
-                    </div>
+     <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="col-md-12">
+                    <h4 class="page-title">Data Aset</h4>
                 </div>
+                <router-view></router-view>
             </div>
-        </section>
-
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <router-view></router-view>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
 </template>
 
