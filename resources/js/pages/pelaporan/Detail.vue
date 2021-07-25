@@ -171,7 +171,7 @@ export default {
 
           console.log(this.aset);
           this.form.id = this.aset.id;
-          this.url_gambar = "/gambar/asets/" + this.aset.gambar;
+          this.url_gambar = "/gambar/asets/" + this.aset.image;
           this.url_laporan = "/gambar/laporan/" + this.aset.gambar;
         });
     },

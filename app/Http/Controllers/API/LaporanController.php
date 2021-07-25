@@ -81,7 +81,7 @@ class LaporanController extends Controller
     public function edit($id)
     {
         $report = Laporan::join('asets', 'laporans.id_aset', '=', 'asets.id')
-            ->select('laporans.*', 'asets.nama_aset', 'asets.qr', 'asets.merk', 'asets.jenis')
+            ->select('laporans.*', 'asets.nama_aset', 'asets.qr', 'asets.merk', 'asets.jenis','asets.gambar as image')
             ->orderBy('laporans.created_at', 'DESC')
             ->where('laporans.id', $id)->get();
         return response()->json(['status' => 'success', 'data' => $report], 200);

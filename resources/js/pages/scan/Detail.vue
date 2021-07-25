@@ -1,21 +1,12 @@
 <template>
-  <div class="content-wrapper">
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Scan QR Aset</h1>
-          </div>
-          <div class="col-sm-6">
-            <breadcrumb></breadcrumb>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
+    <div class="main-panel">
+        <div class="content">
+            <div class="page-inner">
+                <div class="col-md-12">
+                    <h4 class="page-title">Scan QR Aset</h4>
+                </div>
+ <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header bg-teal">
@@ -154,7 +145,7 @@
                       class="btn btn-block bg-teal btn-flat"
                       @click="submit"
                     >
-                      Scan Aset
+                      Scan Asset
                     </button>
                     <router-link
                       :to="{ name: 'scan' }"
@@ -185,105 +176,106 @@
               </div>
             </div>
           </div>
+        </div>  
+            </div>
         </div>
-      </div>
-    </section>
-  </div>
+    </div>
 </template>
 
 <script>
-import axios from "axios";
-import Breadcrumb from "../../components/Breadcrumb.vue";
+    import axios from "axios";
+    import Breadcrumb from "../../components/Breadcrumb.vue";
 
-export default {
-  components: {
-    breadcrumb: Breadcrumb,
-  },
-  created() {
-    console.log(this.$route.params.id);
-    this.getData();
-    this.checkJadwal();
-  },
+    export default {
+        components: {
+            breadcrumb: Breadcrumb,
+        },
+        created() {
+            console.log(this.$route.params.id);
+            this.getData();
+            this.checkJadwal();
+        },
 
-  methods: {
-    async getData() {
-      let get = await axios
-        .get("/api/asets/" + this.$route.params.id + "/edit")
-        .then((response) => {
-          let resp = response.data.data;
-          // console.log(resp)
-          this.data = resp;
-          // console.log(this.data);
-        });
+        methods: {
+            async getData() {
+                let get = await axios
+                    .get("/api/asets/" + this.$route.params.id + "/edit")
+                    .then((response) => {
+                        let resp = response.data.data;
+                        // console.log(resp)
+                        this.data = resp;
+                        // console.log(this.data);
+                    });
 
-      this.url_gambar = "/gambar/asets/" + this.data.gambar;
-    },
+                this.url_gambar = "/gambar/asets/" + this.data.gambar;
+            },
 
-    async checkJadwal() {
-      let divisi = localStorage.getItem("divisi");
-      let uri = "/api/jadwal/" + divisi + "/check";
+            async checkJadwal() {
+                let divisi = localStorage.getItem("divisi");
+                let uri = "/api/jadwal/" + divisi + "/check";
 
-      await axios.get(uri).then((response) => {
-        this.jadwal = response.data.data[0];
-        // console.log(response)
-      });
+                await axios.get(uri).then((response) => {
+                    this.jadwal = response.data.data[0];
+                    // console.log(response)
+                });
 
-      // console.log(this.jadwal);
-    },
+                // console.log(this.jadwal);
+            },
 
-    async submit() {
-      try {
-        this.form.id_jadwal = this.jadwal.id;
-        this.form.id_aset = this.data.id;
-        let uri = "/api/scan/store";
-        let response = await axios.post(uri, this.form);
+            async submit() {
+                try {
+                    this.form.id_jadwal = this.jadwal.id;
+                    this.form.id_aset = this.data.id;
+                    let uri = "/api/scan/store";
+                    let response = await axios.post(uri, this.form);
 
-        if (response.status == 200) {
-          this.$toasted.show(response.data.message, {
-            type: response.data.status,
-            duration: 3000,
-          });
-        }
-      } catch (e) {
-        console.log(e.response.data.errors);
-        this.errors = e.response.data.errors;
+                    if (response.status == 200) {
+                        this.$toasted.show(response.data.message, {
+                            type: response.data.status,
+                            duration: 3000,
+                        });
+                    }
+                } catch (e) {
+                    console.log(e.response.data.errors);
+                    this.errors = e.response.data.errors;
 
-        this.$toasted.show("Something went wrong...", {
-          type: "error",
-          duration: 3000,
-        });
-      }
-    },
-  },
+                    this.$toasted.show("Something went wrong...", {
+                        type: "error",
+                        duration: 3000,
+                    });
+                }
+            },
+        },
 
-  data() {
-    return {
-      data: {
-        id: "",
-        nama_aset: "",
-        jenis: "",
-        merk: "",
-        divisi: "",
-        deskripsi: "",
-        status: "",
-        qr: "qr",
-        gambar: "",
-        serial_number: "",
-        created_at: "",
-        updated_at: "",
-      },
+        data() {
+            return {
+                data: {
+                    id: "",
+                    nama_aset: "",
+                    jenis: "",
+                    merk: "",
+                    divisi: "",
+                    deskripsi: "",
+                    status: "",
+                    qr: "qr",
+                    gambar: "",
+                    serial_number: "",
+                    created_at: "",
+                    updated_at: "",
+                },
 
-      form: {},
+                form: {},
 
-      url_gambar: "",
+                url_gambar: "",
 
-      divisi: localStorage.getItem("divisi"),
+                divisi: localStorage.getItem("divisi"),
 
-      // check jadwal
-      jadwal: null,
+                // check jadwal
+                jadwal: null,
+            };
+        },
     };
-  },
-};
+
 </script>
 
 <style>

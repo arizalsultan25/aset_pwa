@@ -18,7 +18,7 @@
     <meta name="theme-color" content="#20c997" />
     <meta name="description" content="Sistem Manajemen Aset dengan Progressive Web Application.">
 
-    <link rel="canonical" href="https://localhost:8080/" />
+    <link rel="canonical" href="https://google.com/" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -107,8 +107,8 @@
 	<script src="{{ asset('js/atlantis.min.js') }}"></script>
 
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
-	<!-- <script src="{{ asset('js/setting-demo.js') }}"></script>
-	<script src="{{ asset('js/demo.js') }}"></script> -->
+	<script src="{{ asset('js/setting-demo.js') }}"></script>
+	<script src="{{ asset('js/demo.js') }}"></script>
 
     <script>
         if ('serviceWorker' in navigator) {

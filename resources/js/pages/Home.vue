@@ -107,7 +107,7 @@
                                     <div class="col col-stats ml-3 ml-sm-0">
                                         <div class="numbers">
                                             <p class="card-category">Production</p>
-                                            <h4 class="card-title">{{ data.it }}</h4>
+                                            <h4 class="card-title">{{ data.prod }}</h4>
                                         </div>
                                     </div>
                                 </div>
