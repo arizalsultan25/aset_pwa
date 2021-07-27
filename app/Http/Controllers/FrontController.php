@@ -10,4 +10,9 @@ class FrontController extends Controller
     {
         return view('index');
     }
+
+    public function offline()
+    {
+        return view('offline');
+    }
 }

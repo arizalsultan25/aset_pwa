@@ -52,6 +52,9 @@ import AddJadwal from './pages/jadwal/Add.vue'
 import IndexJadwalDiv from './pages/jadwal_divisi/Index.vue'
 import JadwalDiv from './pages/jadwal_divisi/Jadwal.vue'
 
+// IMPORT HALAMAN OFFLINE
+import OfflinePage from './pages/Offline.vue'
+
 Vue.use(Router)
 
 //DEFINE ROUTE
@@ -74,6 +77,11 @@ const router = new Router({
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/offline',
+            name: 'offline',
+            component: OfflinePage
         },
 
         // Aset Routes

@@ -10,5 +10,5 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/offline','FrontController@offline' );
 Route::get('/{any}', 'FrontController@index')->where('any', '.*');
